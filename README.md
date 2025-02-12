@@ -1,4 +1,6 @@
-# FineFinance
+# FINEFIN
+
+![alt text](assets/finefin-dark.png)
 
 ## 1. Descrição
 FineFinance é uma aplicação web para o controle geral de finanças.
