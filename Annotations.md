@@ -1,0 +1,1 @@
+- Reccorrência é no frontend, a entidade tem o atributo mas a recorrência
