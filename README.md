@@ -45,7 +45,7 @@ O <strong>FineFinance</strong>, aplicação para gerenciar as finanças, surge p
 
 ## 6. Tecnologias
 - <strong>Design:</strong> Figma, Photoshop, Canva
-- <strong>Frontend:</strong> React, JavaScript, Html, CSS, shadcn, axios
+- <strong>Frontend:</strong> Angular, TypeScript, Html, CSS, angular material
 - <strong>Backend:</strong> .NET, C#, SQL, Docker, EF Core, xUnit, Bogus, Moq, FluentValidator
 - <strong>Deploy:</strong> Azure ou AWS
 
