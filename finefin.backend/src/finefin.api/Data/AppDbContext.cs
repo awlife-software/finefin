@@ -1,4 +1,5 @@
-﻿using finefin.api.Models.Entities;
+﻿using finefin.api.Data.Mappings;
+using finefin.api.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace finefin.api.Data
@@ -12,7 +13,11 @@ namespace finefin.api.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+            modelBuilder.ApplyConfiguration(new UserMap());
+            modelBuilder.ApplyConfiguration(new WalletMap());
+            modelBuilder.ApplyConfiguration(new TransactionMap());
+            modelBuilder.ApplyConfiguration(new RecurrencyMap());
         }
 
     }

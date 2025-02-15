@@ -7,6 +7,7 @@ namespace finefin.api.Models.Entities
     {
         [EnumDataType(typeof(RecurrencyType))]
         public string Type { get; set; } = string.Empty;
+        public int Occurrences { get; set; } // "Installments" vai ser usado para parcelas de crédito pois é mais adequado
         public virtual ICollection<Transaction> Transactions { get; set; } = [];
     }
 }

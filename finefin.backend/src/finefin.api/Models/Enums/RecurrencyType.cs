@@ -5,6 +5,7 @@
         DAYLI = 0,
         WEEKLY = 1,
         MONTHLY = 2,
-        YEARLY = 3,
+        QUARTERLY = 3,
+        YEARLY = 4,
     }
 }

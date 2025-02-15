@@ -2,8 +2,8 @@
 {
     public enum WalletType
     {
-        CARTEIRA = 0,
-        CORRENTE = 1,
-        INVESTIMENTO = 2
+        CASH = 0,
+        CHECKING = 1,
+        INVESTMENT = 2
     }
 }
