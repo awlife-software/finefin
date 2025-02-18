@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
+﻿using finefin.api.Exceptions;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace finefin.api.Http.Filters
 {
@@ -6,7 +7,21 @@ namespace finefin.api.Http.Filters
     {
         public void OnException(ExceptionContext context)
         {
-            throw new NotImplementedException();
+            if (context.Exception is AppBaseException)
+                HandleProjectException(context);
+            else
+                HandleUnknowException(context);
+            
+        }
+
+        private void HandleProjectException(ExceptionContext context)
+        {
+
+        }
+
+        private void HandleUnknowException(ExceptionContext context)
+        {
+
         }
     }
 }

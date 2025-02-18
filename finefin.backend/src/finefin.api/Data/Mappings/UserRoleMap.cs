@@ -9,8 +9,8 @@ namespace finefin.api.Data.Mappings
         public void Configure(EntityTypeBuilder<UserRole> builder)
         {
             builder.ToTable("TB_USER_ROLES").HasKey(x => new {x.UserId, x.RoleId});
-
-            builder.Property(x => x.Id).HasColumnName("URL_ID");
+            builder.Ignore(x => x.Id);
+            
             builder.Property(x => x.CreatedAt).HasColumnName("URL_CREATED_AT");
             builder.Property(x => x.UpdatedAt).HasColumnName("URL_UPDATED_AT");
             builder.Property(x => x.UserId).HasColumnName("URL_USER_ID");

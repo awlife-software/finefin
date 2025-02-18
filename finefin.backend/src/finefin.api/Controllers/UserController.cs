@@ -1,6 +1,6 @@
 ﻿using finefin.api.Http.Requests;
 using finefin.api.Http.Responses;
-using finefin.api.Providers.Services.UserServices;
+using finefin.api.Providers.Services.UserServices.Register;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
