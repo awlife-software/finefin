@@ -10,7 +10,7 @@ namespace finefin.api.Migrations
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
-        { // teste
+        {
             migrationBuilder.CreateTable(
                 name: "TB_RECURRENCY",
                 columns: table => new

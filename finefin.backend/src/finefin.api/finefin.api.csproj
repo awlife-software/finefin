@@ -27,12 +27,8 @@
   <ItemGroup>
     <Folder Include="Exceptions\" />
     <Folder Include="Http\Middlewares\" />
-    <Folder Include="Http\Filters\" />
-    <Folder Include="Http\Requests\" />
-    <Folder Include="Http\Responses\" />
     <Folder Include="Providers\Mapper\" />
     <Folder Include="Providers\Security\" />
-    <Folder Include="Providers\Services\" />
     <Folder Include="Providers\Validation\" />
   </ItemGroup>
 

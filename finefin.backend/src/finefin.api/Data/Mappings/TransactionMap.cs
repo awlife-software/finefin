@@ -14,7 +14,7 @@ namespace finefin.api.Data.Mappings
             builder.Property(x => x.CreatedAt).HasColumnName("TRN_CREATED_AT");
             builder.Property(x => x.UpdatedAt).HasColumnName("TRN_UPDATED_AT");
             builder.Property(x => x.Type).HasColumnName("TRN_TYPE").HasMaxLength(50);
-            builder.Property(x => x.Amount).HasColumnName("TRN_AMOUNT");
+            builder.Property(x => x.Amount).HasColumnName("TRN_AMOUNT").HasPrecision(18,4);
             builder.Property(x => x.DueDate).HasColumnName("TRN_DUEDATE");
             builder.Property(x => x.IsCompleted).HasColumnName("TRN_COMPLETED");
             builder.Property(x => x.IsFixed).HasColumnName("TRN_FIXED");
