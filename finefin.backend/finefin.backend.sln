@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{154D37CF-ADD4-4F02-9DE5-7DC036CC17EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "finefin.api", "src\finefin.api\finefin.api.csproj", "{781F45E9-C6C2-457C-8730-BDD5A0E097B2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{19348ED2-9E09-4A2B-A3D8-C6C0639FDC0D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{781F45E9-C6C2-457C-8730-BDD5A0E097B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{781F45E9-C6C2-457C-8730-BDD5A0E097B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{781F45E9-C6C2-457C-8730-BDD5A0E097B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{781F45E9-C6C2-457C-8730-BDD5A0E097B2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{781F45E9-C6C2-457C-8730-BDD5A0E097B2} = {154D37CF-ADD4-4F02-9DE5-7DC036CC17EB}
+	EndGlobalSection
+EndGlobal
