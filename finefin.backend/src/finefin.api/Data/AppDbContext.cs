@@ -16,12 +16,6 @@ namespace finefin.api.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
-            modelBuilder.ApplyConfiguration(new UserMap());
-            modelBuilder.ApplyConfiguration(new WalletMap());
-            modelBuilder.ApplyConfiguration(new TransactionMap());
-            modelBuilder.ApplyConfiguration(new RecurrencyMap());
-            modelBuilder.ApplyConfiguration(new RoleMap());
-            modelBuilder.ApplyConfiguration(new UserRoleMap());
         }
 
     }

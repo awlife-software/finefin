@@ -28,6 +28,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="clauth.lib">
+      <HintPath>..\..\..\..\..\clauth\src\clauth.lib\bin\Debug\net8.0\clauth.lib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Exceptions\ResourceMessageException.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
