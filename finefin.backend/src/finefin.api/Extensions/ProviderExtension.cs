@@ -1,6 +1,4 @@
 ﻿using finefin.api.Providers.Mapper;
-using finefin.api.Providers.Security;
-using finefin.api.Providers.Security.Interfaces;
 using finefin.api.Providers.Services.UserServices.Register;
 using finefin.api.Providers.Validation.User;
 using finefin.api.Providers.Validation.User.Interfaces;
@@ -23,8 +21,6 @@ namespace finefin.api.Extensions
 
         private static void AddExtraProviders(this IServiceCollection services)
         {
-            services.AddTransient<IPasswordHasher, PasswordHasher>();
-            services.AddTransient<ITokenGenerator, TokenGenerator>();
             services.AddTransient<IUserRegisterValidation, UserRegisterValidation>();
 
         }

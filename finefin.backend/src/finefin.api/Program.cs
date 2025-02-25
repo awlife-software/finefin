@@ -1,3 +1,5 @@
+using clauth.lib.Config;
+using finefin.api.Data;
 using finefin.api.Extensions;
 using finefin.api.Http.Filters;
 using finefin.api.Http.Middlewares;
@@ -14,6 +16,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddData(builder.Configuration);
 builder.Services.AddProviders(builder.Configuration);
+
+builder.Services.AddClauthAuthentication(builder.Configuration);
+builder.Services.AddClauthServices<AppDbContext>();
 
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
 
