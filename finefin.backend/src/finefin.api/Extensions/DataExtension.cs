@@ -1,7 +1,4 @@
-﻿using clauth.lib.Config;
-using finefin.api.Data;
-using finefin.api.Data.Repositories;
-using finefin.api.Data.Repositories.Interfaces;
+﻿using finefin.api.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace finefin.api.Extensions
@@ -28,8 +25,7 @@ namespace finefin.api.Extensions
 
         private static void AddRepositories(this IServiceCollection services)
         {
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IUserRepository, UserRepository>();
+            
         }
     }
 }

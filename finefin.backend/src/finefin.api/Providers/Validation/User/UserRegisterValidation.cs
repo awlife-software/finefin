@@ -1,10 +1,7 @@
-﻿using finefin.api.Data.Repositories.Interfaces;
-using finefin.api.Http.Requests;
+﻿using finefin.api.Http.Requests;
 using finefin.api.Providers.Validation.User.Interfaces;
-using finefin.api.Exceptions;
 using FluentValidation;
-using System.Resources;
-using RSC;
+using valet.lib.Auth.Domain.Interfaces.Repositories;
 
 namespace finefin.api.Providers.Validation.User
 {

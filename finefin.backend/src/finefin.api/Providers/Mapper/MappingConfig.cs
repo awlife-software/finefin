@@ -13,7 +13,7 @@ namespace finefin.api.Providers.Mapper
 
         public void RequestToEntity()
         {
-            CreateMap<RegisterUserRequest, User>()
+            CreateMap<RegisterUserRequest, LocalUser>()
                 .ForMember(dest => dest.Password, opt => opt.Ignore());
         }
     }

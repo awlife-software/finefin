@@ -1,12 +1,10 @@
-﻿using clauth.lib.Core.Entities;
-using clauth.lib.Data;
-using finefin.api.Data.Mappings;
-using finefin.api.Models.Entities;
+﻿using finefin.api.Models.Entities;
 using Microsoft.EntityFrameworkCore;
+using valet.lib.Auth.Data;
 
 namespace finefin.api.Data
 {
-    public class AppDbContext(DbContextOptions options) : ClauthDbContext(options)
+    public class AppDbContext(DbContextOptions options) : AuthDbContext(options)
     {
         public DbSet<Wallet> Wallets { get; set; }
         public DbSet<Transaction> Transactions { get; set; }

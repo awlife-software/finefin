@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using clauth.lib.Core.Entities;
-using clauth.lib.Core.Interfaces;
-using clauth.lib.Core.Interfaces.Services;
-using finefin.api.Data.Repositories.Interfaces;
 using finefin.api.Exceptions;
 using finefin.api.Http.Requests;
 using finefin.api.Models.Entities;
 using finefin.api.Providers.Validation.User.Interfaces;
+using valet.lib.Auth.Domain.Entities;
+using valet.lib.Auth.Domain.Interfaces;
+using valet.lib.Auth.Domain.Interfaces.Repositories;
+using valet.lib.Core.Domain.Interfaces;
 
 namespace finefin.api.Providers.Services.UserServices.Register
 {
@@ -15,47 +15,47 @@ namespace finefin.api.Providers.Services.UserServices.Register
         private readonly IUserRegisterValidation _userRegisterValidation;
         private readonly IMapper _mapper;
         private readonly IPasswordHasher _passwordHasher;
-        private readonly IRoleManager _roleManager;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUserRepository _userRepository;
+        private readonly IRoleRepository _roleRepository;
         // TODO: ADICIONAR A CLAUTH A RESPONSÁBILIDADE PELO REPOSITÓRIO GENÉRICO, PELO UNITOFWORK E TODAS AS RESPONABILIDADES DE USERREPOSITORY
 
-        public UserRegisterService(IUserRegisterValidation userRegisterValidation, IMapper mapper, IPasswordHasher passwordHasher, IRoleManager roleManager, IUnitOfWork unitOfWork, IUserRepository userRepository)
+        public UserRegisterService(IUserRegisterValidation userRegisterValidation, IMapper mapper, IPasswordHasher passwordHasher, IUnitOfWork unitOfWork, IUserRepository userRepository, IRoleRepository roleRepository)
         {
             _userRegisterValidation = userRegisterValidation;
             _mapper = mapper;
             _passwordHasher = passwordHasher;
-            _roleManager = roleManager;
             _unitOfWork = unitOfWork;
             _userRepository = userRepository;
+            _roleRepository = roleRepository;
         }
 
         public async Task RegisterUser(RegisterUserRequest request)
         {
             await ValidateAsync(request);
 
-            var user = _mapper.Map<User>(request);
+            var user = _mapper.Map<LocalUser>(request);
            
             user.SetHashedPassword(_passwordHasher.HashPassword(request.Password));
 
             var role = await RoleHandler();
 
-            user.UserRoles.Add(new ClauthUserRole { Role = role });
+            user.UserRoles.Add(new UserRole { Role = role });
 
             await _userRepository.CreateAsync(user);
 
             await _unitOfWork.Commit();
         }
 
-        private async Task<ClauthRole> RoleHandler()
+        private async Task<Role> RoleHandler()
         {
-            if (!_roleManager.RoleExistsAsync("user").GetAwaiter().GetResult())
+            if (!_roleRepository.RoleExistsAsync("user").GetAwaiter().GetResult())
             {
-                await _roleManager.CreateAsync(new ClauthRole { Name = "user" });
+                await _roleRepository.CreateAsync(new Role { Name = "user" });
                 await _unitOfWork.Commit();
             }
 
-            return await _roleManager.GetAsync(x => x.Name.Equals("user"), false);
+            return await _roleRepository.GetAsync(x => x.Name.Equals("user"), false);
         }
 
         private async Task ValidateAsync(RegisterUserRequest request)

@@ -14,7 +14,7 @@ namespace finefin.api.Models.Entities
         public decimal Balance { get; set; } = decimal.Zero;
         public DateTime LastEditDate { get; set; } = DateTime.UtcNow;
         public virtual ICollection<Transaction> Transactions { get; set; } = [];
-        public virtual User? User { get; set; }
+        public virtual LocalUser? User { get; set; }
         public Guid UserId { get; set; }
     }
 }

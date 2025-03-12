@@ -1,8 +1,8 @@
-﻿using clauth.lib.Core.Entities;
+﻿using valet.lib.Auth.Domain.Entities;
 
 namespace finefin.api.Models.Entities
 {
-    public class User : ClauthUser
+    public class LocalUser : User
     {
         public ICollection<Wallet> Wallets { get; set; } = [];
     }
