@@ -25,7 +25,7 @@ namespace finefin.api.Extensions
 
         private static void AddRepositories(this IServiceCollection services)
         {
-            // TODO: ADD REPOSITORIES
+            
         }
     }
 }

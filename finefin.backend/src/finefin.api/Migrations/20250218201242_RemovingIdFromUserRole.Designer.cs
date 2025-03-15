@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using finefin.api.Data;
 
@@ -11,9 +12,11 @@ using finefin.api.Data;
 namespace finefin.api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250218201242_RemovingIdFromUserRole")]
+    partial class RemovingIdFromUserRole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,114 +24,6 @@ namespace finefin.api.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("clauth.lib.Core.Entities.ClauthRole", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("RLE_ID");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("RLE_CREATED_AT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)")
-                        .HasColumnName("RLE_NAME");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("RLE_UPDATED_AT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
-
-                    b.ToTable("TB_ROLES", (string)null);
-                });
-
-            modelBuilder.Entity("clauth.lib.Core.Entities.ClauthUser", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("USR_ID");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("USR_CREATED_AT");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(13)
-                        .HasColumnType("nvarchar(13)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)")
-                        .HasColumnName("USR_EMAIL");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)")
-                        .HasColumnName("USR_FIRST_NAME");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)")
-                        .HasColumnName("USR_LAST_NAME");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("USR_PASSWORD");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("USR_UPDATED_AT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Email")
-                        .IsUnique();
-
-                    b.ToTable("TB_USERS", (string)null);
-
-                    b.HasDiscriminator().HasValue("ClauthUser");
-
-                    b.UseTphMappingStrategy();
-                });
-
-            modelBuilder.Entity("clauth.lib.Core.Entities.ClauthUserRole", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("URL_USER_ID");
-
-                    b.Property<Guid>("RoleId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("URL_ROLE_ID");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("URL_CREATED_AT");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("URL_UPDATED_AT");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("TB_USER_ROLES", (string)null);
-                });
 
             modelBuilder.Entity("finefin.api.Models.Entities.Recurrency", b =>
                 {
@@ -158,6 +53,34 @@ namespace finefin.api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TB_RECURRENCY", (string)null);
+                });
+
+            modelBuilder.Entity("finefin.api.Models.Entities.Role", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("RLE_ID");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("RLE_CREATED_AT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("RLE_NAME");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("RLE_UPDATED_AT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("TB_ROLES", (string)null);
                 });
 
             modelBuilder.Entity("finefin.api.Models.Entities.Transaction", b =>
@@ -219,6 +142,77 @@ namespace finefin.api.Migrations
                     b.ToTable("TB_TRANSACTION", (string)null);
                 });
 
+            modelBuilder.Entity("finefin.api.Models.Entities.User", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("USR_ID");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("USR_CREATED_AT");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)")
+                        .HasColumnName("USR_EMAIL");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)")
+                        .HasColumnName("USR_FIRST_NAME");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)")
+                        .HasColumnName("USR_LAST_NAME");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("USR_PASSWORD");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("USR_UPDATED_AT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.ToTable("TB_USERS", (string)null);
+                });
+
+            modelBuilder.Entity("finefin.api.Models.Entities.UserRole", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("URL_USER_ID");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("URL_ROLE_ID");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("URL_CREATED_AT");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("URL_UPDATED_AT");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("TB_USER_ROLES", (string)null);
+                });
+
             modelBuilder.Entity("finefin.api.Models.Entities.Wallet", b =>
                 {
                     b.Property<Guid>("Id")
@@ -272,32 +266,6 @@ namespace finefin.api.Migrations
                     b.ToTable("TB_WALLET", (string)null);
                 });
 
-            modelBuilder.Entity("finefin.api.Models.Entities.User", b =>
-                {
-                    b.HasBaseType("clauth.lib.Core.Entities.ClauthUser");
-
-                    b.HasDiscriminator().HasValue("User");
-                });
-
-            modelBuilder.Entity("clauth.lib.Core.Entities.ClauthUserRole", b =>
-                {
-                    b.HasOne("clauth.lib.Core.Entities.ClauthRole", "Role")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("clauth.lib.Core.Entities.ClauthUser", "User")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Role");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("finefin.api.Models.Entities.Transaction", b =>
                 {
                     b.HasOne("finefin.api.Models.Entities.Recurrency", "Recurrency")
@@ -315,6 +283,25 @@ namespace finefin.api.Migrations
                     b.Navigation("Wallet");
                 });
 
+            modelBuilder.Entity("finefin.api.Models.Entities.UserRole", b =>
+                {
+                    b.HasOne("finefin.api.Models.Entities.Role", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("finefin.api.Models.Entities.User", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("finefin.api.Models.Entities.Wallet", b =>
                 {
                     b.HasOne("finefin.api.Models.Entities.User", "User")
@@ -326,29 +313,26 @@ namespace finefin.api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("clauth.lib.Core.Entities.ClauthRole", b =>
-                {
-                    b.Navigation("UserRoles");
-                });
-
-            modelBuilder.Entity("clauth.lib.Core.Entities.ClauthUser", b =>
-                {
-                    b.Navigation("UserRoles");
-                });
-
             modelBuilder.Entity("finefin.api.Models.Entities.Recurrency", b =>
                 {
                     b.Navigation("Transactions");
                 });
 
-            modelBuilder.Entity("finefin.api.Models.Entities.Wallet", b =>
+            modelBuilder.Entity("finefin.api.Models.Entities.Role", b =>
                 {
-                    b.Navigation("Transactions");
+                    b.Navigation("UserRoles");
                 });
 
             modelBuilder.Entity("finefin.api.Models.Entities.User", b =>
                 {
+                    b.Navigation("UserRoles");
+
                     b.Navigation("Wallets");
+                });
+
+            modelBuilder.Entity("finefin.api.Models.Entities.Wallet", b =>
+                {
+                    b.Navigation("Transactions");
                 });
 #pragma warning restore 612, 618
         }
