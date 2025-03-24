@@ -6,10 +6,12 @@ namespace finefin_test._03._Builders.Entities
 {
     public class UserBuilder
     {
-        public static (User user, string password) Build()
+        public static (User user, string password) Build(string password = "")
         {
             var passwordHasher = new PasswordHasher();
-            var password = new Faker().Internet.Password();
+
+            if (string.IsNullOrEmpty(password))
+                password = new Faker().Internet.Password();
 
             var user = new Faker<User>()
                 .RuleFor(x => x.FirstName, (f) => f.Person.FirstName)

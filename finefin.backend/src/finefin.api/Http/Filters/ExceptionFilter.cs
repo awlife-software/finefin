@@ -23,6 +23,12 @@ namespace finefin.api.Http.Filters
                 context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
                 context.Result = new BadRequestObjectResult(new ErrorResponse(validationException.ErrorMessages));
             }
+
+            if (context.Exception is InvalidLoginException invalidLoginException)
+            {
+                context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
+                context.Result = new BadRequestObjectResult(new ErrorResponse(invalidLoginException.Message));
+            }
         }
 
         private void HandleUnknowException(ExceptionContext context)

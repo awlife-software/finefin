@@ -14,7 +14,7 @@ namespace finefin_test._03._Builders.Requests
                 .RuleFor(user => user.FirstName, (f) => f.Person.FirstName)
                 .RuleFor(user => user.LastName, (f) => f.Person.LastName)
                 .RuleFor(user => user.Email, (f, u) => f.Internet.Email(u.FirstName, u.LastName))
-                .RuleFor(user => user.Password, password.Substring(0,half).ToUpper() + "#" + password.Substring(half).ToLower() );
+                .RuleFor(user => user.Password, password.Substring(0,half).ToUpper() + "#" + password.Substring(half).ToLower());
         }
     }
 }
