@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using finefin.api.Exceptions;
 using finefin.api.Providers.Services.UserServices.Register;
 using finefin.api.Providers.Validation.User;
 using finefin.api.Providers.Validation.User.Interfaces;
@@ -32,11 +33,9 @@ namespace finefin_test._01._UnitTests.Providers.Services.UserServices.Register
         }
 
         [Fact]
-        public async Task Success()
+        public async Task Should_Register_User()
         {
             var request = RegisterUserRequestBuilder.Build();
-
-            request.Password = request.Password.ToUpper() + "#" + request.Password.ToLower();
 
             _roleRepository.Setup(repo => repo.RoleExistsAsync("user")).ReturnsAsync(false);
             _roleRepository.Setup(repo => repo.GetAsync(x => x.Name == "user", false)).ReturnsAsync(new Role { Name = "user" });
@@ -48,6 +47,25 @@ namespace finefin_test._01._UnitTests.Providers.Services.UserServices.Register
             _unitOfWork.Verify(x => x.Commit(), Times.Exactly(2));
             _userRepository.Verify(x => x.CreateAsync(It.Is<User>(x => x.FirstName.Equals(request.FirstName))), Times.Once);
             _roleRepository.Verify(x => x.CreateAsync(It.Is<Role>(x => x.Name.Equals("user"))), Times.Once);
+        }
+
+        [Fact]
+        public async Task Should_Throw_Invalid_Password()
+        {
+            var request = RegisterUserRequestBuilder.Build(6);
+            
+            var service = CreateService();
+
+            var act = async () => await service.RegisterUser(request);
+
+            var exception = await Assert.ThrowsAsync<ErrorOnValidationException>(act);
+
+            Assert.Single(exception.ErrorMessages);
+            Assert.Equal(RSC.ResourceMessageException.PASSWORD_INVALID, exception.ErrorMessages.First());
+            
+            _unitOfWork.Verify(x => x.Commit(), Times.Never);
+            _userRepository.Verify(x => x.CreateAsync(It.IsAny<User>()), Times.Never);
+            _roleRepository.Verify(x => x.CreateAsync(It.IsAny<Role>()), Times.Never);
         }
 
         public UserRegisterService CreateService() => new(_userRegisterValidation, _mapper, _passwordHasher.Object, _unitOfWork.Object, _userRepository.Object, _roleRepository.Object);
