@@ -28,7 +28,7 @@ namespace finefin_test._01._UnitTests.Providers.Services.UserServices.Login
         }
 
         [Fact]
-        public async Task Should_Succesfully_Login()
+        public async Task Should__Login()
         {
             var request = UserLoginRequestBuilder.Build();
             

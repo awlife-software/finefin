@@ -20,7 +20,7 @@ namespace finefin_test._02._IntegrationTests.Controllers.User
         }
 
         [Fact]
-        public async Task Should_Return_Name_Empty()
+        public async Task Should_Throw_Name_Empty()
         {
             var request = RegisterUserRequestBuilder.Build();
             request.FirstName = string.Empty;

@@ -1,15 +1,21 @@
 ﻿using finefin.api.Data;
+using finefin.api.Models.Entities;
 using finefin_test._03._Builders.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using valet.lib.Auth.Domain.Entities;
 
 namespace finefin_test._02._IntegrationTests
 {
     public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     {
+        private LocalUser _user = default!;
+        private string _password = string.Empty;
+
+        public string GetEmail() => _user.Email;
+        public string GetPassword() => _password;
+
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
             builder.UseEnvironment("Test")
@@ -33,7 +39,16 @@ namespace finefin_test._02._IntegrationTests
 
                     dbContext.Database.EnsureDeleted();
 
+                    InsertData(dbContext);
                 });
+        }
+
+        private void InsertData(AppDbContext context)
+        {
+            (_user, _password) = UserBuilder.Build();
+
+            context.Users.Add(_user);
+            context.SaveChanges();
         }
 
   
