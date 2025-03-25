@@ -64,8 +64,8 @@ namespace finefin.api.Providers.Services.UserServices.Register
 
             if (!result.IsValid)
             {
-                var erros = result.Errors.Select(x => x.ErrorMessage).ToList();
-                throw new ErrorOnValidationException(erros);
+                var errors = result.Errors.Select(x => x.ErrorMessage).ToList();
+                throw new ErrorOnValidationException(errors);
             }
         }
     }

@@ -16,8 +16,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddData(builder.Configuration);
 builder.Services.AddProviders(builder.Configuration);
 
-builder.Services.AddValetAuthServices(builder.Configuration);
-builder.Services.AddValetContext<AppDbContext>(true);
+builder.Services.AddValet<AppDbContext>(builder.Configuration, true)
+    .UsePasswordHasher()
+    .UseTokenGenerator(builder.Configuration)
+    .UseValetJwt(builder.Configuration)
+    .UseValetSwaggerGen();
 
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
 
@@ -39,3 +42,8 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+public partial class Program
+{
+
+}
