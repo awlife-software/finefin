@@ -23,6 +23,7 @@ builder.Services.AddValet<AppDbContext>(builder.Configuration, true)
     .UseValetSwaggerGen();
 
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
+builder.Services.AddRouting(options => options.LowercaseUrls = true);
 
 var app = builder.Build();
 
