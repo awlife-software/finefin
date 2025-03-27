@@ -1,8 +1,8 @@
 ﻿using Bogus;
 using finefin.api.Http.Requests;
-using finefin_test._03._Builders.Providers;
+using finefin.test._03._Builders.Providers;
 
-namespace finefin_test._03._Builders.Requests
+namespace finefin.test._03._Builders.Requests
 {
     public static class UserLoginRequestBuilder
     {

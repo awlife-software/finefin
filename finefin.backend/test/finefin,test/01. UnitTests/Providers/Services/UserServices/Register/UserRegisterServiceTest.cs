@@ -5,9 +5,9 @@ using finefin.api.Models.Entities;
 using finefin.api.Providers.Services.UserServices.Register;
 using finefin.api.Providers.Validation.User;
 using finefin.api.Providers.Validation.User.Interfaces;
-using finefin_test._03._Builders.Entities;
-using finefin_test._03._Builders.Providers;
-using finefin_test._03._Builders.Requests;
+using finefin.test._03._Builders.Entities;
+using finefin.test._03._Builders.Providers;
+using finefin.test._03._Builders.Requests;
 using Moq;
 using valet.lib.Auth.Domain.Entities;
 using valet.lib.Auth.Domain.Interfaces;
@@ -15,7 +15,7 @@ using valet.lib.Auth.Domain.Interfaces.Repositories;
 using valet.lib.Core.Domain.Interfaces;
 using FluentValidation.Results;
 
-namespace finefin_test._01._UnitTests.Providers.Services.UserServices.Register
+namespace finefin.test._01._UnitTests.Providers.Services.UserServices.Register
 {
     public class UserRegisterServiceTest
     {

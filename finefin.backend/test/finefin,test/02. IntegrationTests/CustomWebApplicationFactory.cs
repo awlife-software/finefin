@@ -1,12 +1,12 @@
 ﻿using finefin.api.Data;
 using finefin.api.Models.Entities;
-using finefin_test._03._Builders.Entities;
+using finefin.test._03._Builders.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace finefin_test._02._IntegrationTests
+namespace finefin.test._02._IntegrationTests
 {
     public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     {

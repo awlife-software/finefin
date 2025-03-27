@@ -1,10 +1,10 @@
-﻿using finefin_test._03._Builders.Requests;
+﻿using finefin.test._03._Builders.Requests;
 using RSC;
 using System.Globalization;
 using System.Net;
 using System.Text.Json;
 
-namespace finefin_test._02._IntegrationTests.Controllers.User
+namespace finefin.test._02._IntegrationTests.Controllers.User
 {
     public class UserRegisterTest(CustomWebApplicationFactory factory) : ApplicationClassFixture(factory)
     {

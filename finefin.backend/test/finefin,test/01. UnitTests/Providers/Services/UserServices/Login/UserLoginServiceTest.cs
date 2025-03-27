@@ -1,8 +1,8 @@
 ﻿using finefin.api.Http.Requests;
 using finefin.api.Providers.Services.UserServices.Login;
 using finefin.api.Providers.Validation.User.Interfaces;
-using finefin_test._03._Builders.Entities;
-using finefin_test._03._Builders.Requests;
+using finefin.test._03._Builders.Entities;
+using finefin.test._03._Builders.Requests;
 using Moq;
 using valet.lib.Auth.Domain.Interfaces;
 using valet.lib.Auth.Domain.Interfaces.Repositories;
@@ -10,7 +10,7 @@ using FluentValidation.Results;
 using valet.lib.Auth.Domain.Entities;
 using finefin.api.Exceptions;
 
-namespace finefin_test._01._UnitTests.Providers.Services.UserServices.Login
+namespace finefin.test._01._UnitTests.Providers.Services.UserServices.Login
 {
     public class UserLoginServiceTest
     {

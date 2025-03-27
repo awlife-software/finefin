@@ -1,6 +1,6 @@
 ﻿using Bogus;
 
-namespace finefin_test._03._Builders.Providers
+namespace finefin.test._03._Builders.Providers
 {
     public static class PasswordBuilder
     {

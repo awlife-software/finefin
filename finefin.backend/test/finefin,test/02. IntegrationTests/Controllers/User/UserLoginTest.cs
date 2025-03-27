@@ -3,7 +3,7 @@ using RSC;
 using System.Net;
 using System.Text.Json;
 
-namespace finefin_test._02._IntegrationTests.Controllers.User
+namespace finefin.test._02._IntegrationTests.Controllers.User
 {
     public class UserLoginTest : ApplicationClassFixture
     {

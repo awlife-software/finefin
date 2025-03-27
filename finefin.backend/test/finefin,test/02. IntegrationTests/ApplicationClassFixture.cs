@@ -1,6 +1,6 @@
 ﻿using System.Net.Http.Json;
 
-namespace finefin_test._02._IntegrationTests
+namespace finefin.test._02._IntegrationTests
 {
     public class ApplicationClassFixture : IClassFixture<CustomWebApplicationFactory>
     {

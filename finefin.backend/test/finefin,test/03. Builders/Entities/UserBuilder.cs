@@ -1,10 +1,10 @@
 ﻿using Bogus;
 using finefin.api.Models.Entities;
-using finefin_test._03._Builders.Providers;
+using finefin.test._03._Builders.Providers;
 using valet.lib.Auth.Domain.Entities;
 using valet.lib.Auth.Service.Hash;
 
-namespace finefin_test._03._Builders.Entities
+namespace finefin.test._03._Builders.Entities
 {
     public class UserBuilder
     {

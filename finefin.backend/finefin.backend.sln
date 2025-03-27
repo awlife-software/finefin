@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "finefin.api", "src\finefin.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{19348ED2-9E09-4A2B-A3D8-C6C0639FDC0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "finefin,test", "test\finefin,test\finefin,test.csproj", "{8E2DFADF-D08E-4390-B22A-2C8F1D0C4683}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "finefin.test", "test\finefin,test\finefin.test.csproj", "{8E2DFADF-D08E-4390-B22A-2C8F1D0C4683}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
