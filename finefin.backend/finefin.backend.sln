@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "finefin.api", "src\finefin.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{19348ED2-9E09-4A2B-A3D8-C6C0639FDC0D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "finefin,test", "test\finefin,test\finefin,test.csproj", "{8E2DFADF-D08E-4390-B22A-2C8F1D0C4683}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,11 +21,16 @@ Global
 		{781F45E9-C6C2-457C-8730-BDD5A0E097B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{781F45E9-C6C2-457C-8730-BDD5A0E097B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{781F45E9-C6C2-457C-8730-BDD5A0E097B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E2DFADF-D08E-4390-B22A-2C8F1D0C4683}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E2DFADF-D08E-4390-B22A-2C8F1D0C4683}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E2DFADF-D08E-4390-B22A-2C8F1D0C4683}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E2DFADF-D08E-4390-B22A-2C8F1D0C4683}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{781F45E9-C6C2-457C-8730-BDD5A0E097B2} = {154D37CF-ADD4-4F02-9DE5-7DC036CC17EB}
+		{8E2DFADF-D08E-4390-B22A-2C8F1D0C4683} = {19348ED2-9E09-4A2B-A3D8-C6C0639FDC0D}
 	EndGlobalSection
 EndGlobal
