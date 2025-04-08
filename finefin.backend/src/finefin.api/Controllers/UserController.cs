@@ -3,6 +3,7 @@ using finefin.api.Http.Responses;
 using finefin.api.Providers.Services.UserServices.Login;
 using finefin.api.Providers.Services.UserServices.Register;
 using Microsoft.AspNetCore.Mvc;
+using valet.lib.Core.Exception.Response;
 
 namespace finefin.api.Controllers
 {

@@ -1,7 +1,8 @@
 ﻿using finefin.api.Exceptions;
-using finefin.api.Http.Responses;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using valet.lib.Core.Exception;
+using valet.lib.Core.Exception.Response;
 
 namespace finefin.api.Http.Filters
 {
@@ -9,7 +10,7 @@ namespace finefin.api.Http.Filters
     {
         public void OnException(ExceptionContext context)
         {
-            if (context.Exception is AppBaseException)
+            if (context.Exception is BaseException)
                 HandleProjectException(context);
             else
                 HandleUnknowException(context);
