@@ -147,4 +147,16 @@
   <data name="UNKNOW_ERROR" xml:space="preserve">
     <value>Erro desconhecido.</value>
   </data>
+  <data name="USER_INVALID" xml:space="preserve">
+    <value>O identificador do usuário não foi encontrado na requisição.</value>
+  </data>
+  <data name="WALLET_COLOR_INVALID" xml:space="preserve">
+    <value>Cor da carteira inválida.</value>
+  </data>
+  <data name="WALLET_NAME_LENGTH" xml:space="preserve">
+    <value>O nome da carteira deve possuir no mínimo 2 e no máximo 20 caracteres.</value>
+  </data>
+  <data name="WALLET_TYPE_INVALID" xml:space="preserve">
+    <value>Tipo de carteira inválido.</value>
+  </data>
 </root>

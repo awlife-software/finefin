@@ -149,5 +149,41 @@ namespace RSC {
                 return ResourceManager.GetString("UNKNOW_ERROR", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User identifier on request was not found..
+        /// </summary>
+        public static string USER_INVALID {
+            get {
+                return ResourceManager.GetString("USER_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wallet color invalid..
+        /// </summary>
+        public static string WALLET_COLOR_INVALID {
+            get {
+                return ResourceManager.GetString("WALLET_COLOR_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wallet name must have at least 2 and maximum of 20 characters..
+        /// </summary>
+        public static string WALLET_NAME_LENGTH {
+            get {
+                return ResourceManager.GetString("WALLET_NAME_LENGTH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wallet type invalid..
+        /// </summary>
+        public static string WALLET_TYPE_INVALID {
+            get {
+                return ResourceManager.GetString("WALLET_TYPE_INVALID", resourceCulture);
+            }
+        }
     }
 }

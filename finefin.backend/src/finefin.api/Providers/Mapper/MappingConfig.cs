@@ -15,6 +15,8 @@ namespace finefin.api.Providers.Mapper
         {
             CreateMap<RegisterUserRequest, LocalUser>()
                 .ForMember(dest => dest.Password, opt => opt.Ignore());
+
+            CreateMap<CreateWalletRequest, Wallet>();
         }
     }
 }
