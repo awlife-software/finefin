@@ -1,7 +1,10 @@
 ﻿using finefin.api.Providers.Mapper;
+using finefin.api.Providers.Services.TransactionServices.Create;
 using finefin.api.Providers.Services.UserServices.Login;
 using finefin.api.Providers.Services.UserServices.Register;
 using finefin.api.Providers.Services.WalletServices.Create;
+using finefin.api.Providers.Validation.Transaction;
+using finefin.api.Providers.Validation.Transaction.Interfaces;
 using finefin.api.Providers.Validation.User;
 using finefin.api.Providers.Validation.User.Interfaces;
 using finefin.api.Providers.Validation.Wallet;
@@ -23,6 +26,7 @@ namespace finefin.api.Extensions
             services.AddScoped<IUserRegisterService, UserRegisterService>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<ICreateWalletService, CreateWalletService>();
+            services.AddScoped<ICreateTransactionService, CreateTransactionService>();
         }
 
         private static void AddExtraProviders(this IServiceCollection services)
@@ -30,6 +34,7 @@ namespace finefin.api.Extensions
             services.AddTransient<IUserRegisterValidation, UserRegisterValidation>();
             services.AddTransient<ILoginValidation, LoginValidation>();
             services.AddTransient<ICreateWalletValidation, CreateWalletValidation>();
+            services.AddTransient<ICreateTransactionValidation, CreateTransactionValidation>();
         }
 
         private static void AddAutoMapper(this IServiceCollection services)

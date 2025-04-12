@@ -28,6 +28,8 @@ namespace finefin.api.Extensions
         private static void AddRepositories(this IServiceCollection services)
         {
             services.AddScoped<IWalletRepository, WalletRepository>();
+            services.AddScoped<ITransactionRepository, TransactionRepository>();
+            services.AddScoped<IRecurrencyRepository, RecurrencyRepository>();
         }
     }
 }

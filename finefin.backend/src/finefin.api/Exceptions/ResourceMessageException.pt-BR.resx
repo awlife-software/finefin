@@ -144,6 +144,18 @@
   <data name="PASSWORD_INVALID" xml:space="preserve">
     <value>A senha deve ter pelo menos 6 caracteres e incluir pelo menos um maiúsculo, um minúsculo e um especial.</value>
   </data>
+  <data name="RECURRENCY_OCCURRENCIES_MAX" xml:space="preserve">
+    <value>Não podemos registrar mais de 100 ocorrências para uma transação.</value>
+  </data>
+  <data name="RECURRENCY_TYPE_INVALID" xml:space="preserve">
+    <value>Tipo de recorrência inválido.</value>
+  </data>
+  <data name="TRANSACTION_AMOUNT_INVALID" xml:space="preserve">
+    <value>A quantidade deve ser maior do que zero.</value>
+  </data>
+  <data name="TRANSACTION_TYPE_INVALID" xml:space="preserve">
+    <value>Tipo de transação inválido.</value>
+  </data>
   <data name="UNKNOW_ERROR" xml:space="preserve">
     <value>Erro desconhecido.</value>
   </data>
@@ -158,5 +170,8 @@
   </data>
   <data name="WALLET_TYPE_INVALID" xml:space="preserve">
     <value>Tipo de carteira inválido.</value>
+  </data>
+  <data name="WALLET_USER_AUTHORIZATION" xml:space="preserve">
+    <value>A carteira não pertence ao usuário.</value>
   </data>
 </root>

@@ -142,6 +142,42 @@ namespace RSC {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Couldn&apos;t register more than 100 occurrences for a transaction..
+        /// </summary>
+        public static string RECURRENCY_OCCURRENCIES_MAX {
+            get {
+                return ResourceManager.GetString("RECURRENCY_OCCURRENCIES_MAX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid recrrency type..
+        /// </summary>
+        public static string RECURRENCY_TYPE_INVALID {
+            get {
+                return ResourceManager.GetString("RECURRENCY_TYPE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Amount should be greater than zero..
+        /// </summary>
+        public static string TRANSACTION_AMOUNT_INVALID {
+            get {
+                return ResourceManager.GetString("TRANSACTION_AMOUNT_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid transaction type..
+        /// </summary>
+        public static string TRANSACTION_TYPE_INVALID {
+            get {
+                return ResourceManager.GetString("TRANSACTION_TYPE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unknow error..
         /// </summary>
         public static string UNKNOW_ERROR {
@@ -178,11 +214,20 @@ namespace RSC {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wallet type invalid..
+        ///   Looks up a localized string similar to Invalid wallet type..
         /// </summary>
         public static string WALLET_TYPE_INVALID {
             get {
                 return ResourceManager.GetString("WALLET_TYPE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wallet don&apos;t belongs to user..
+        /// </summary>
+        public static string WALLET_USER_AUTHORIZATION {
+            get {
+                return ResourceManager.GetString("WALLET_USER_AUTHORIZATION", resourceCulture);
             }
         }
     }

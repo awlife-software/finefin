@@ -8,10 +8,8 @@ namespace finefin.api.Models.Entities
         [EnumDataType(typeof(TransactionType))]
         public string Type { get; set; } = string.Empty;
         public decimal Amount { get; set; } = decimal.Zero;
-        public DateTime DueDate { get; set; } = DateTime.UtcNow;
+        public DateTime DueDate { get; set; } = DateTime.UtcNow.Date;
         public bool IsCompleted { get; set; }
-        public bool IsFixed { get; set; }
-        public bool IsRecurring { get; set; }
         public virtual Recurrency? Recurrency { get; set; }
         public Guid? RecurrencyId { get; set; }
         public virtual Wallet? Wallet { get; set; }
