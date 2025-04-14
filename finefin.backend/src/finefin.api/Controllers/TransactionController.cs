@@ -22,7 +22,9 @@ namespace finefin.api.Controllers
         public async Task<IActionResult> CreateTransaction([FromServices] ICreateTransactionService service, [FromBody] CreateTransactionRequest request)
         {
             var userId = HttpContext.User.FindFirst(ClaimTypes.Sid)?.Value;
+
             await service.CreateTransaction(userId!, request);
+
             return Created();
         }
     }

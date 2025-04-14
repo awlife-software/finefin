@@ -1,5 +1,6 @@
 ﻿using finefin.api.Models.Enums;
 using System.ComponentModel.DataAnnotations;
+using valet.lib.Core.Domain.Entities;
 
 namespace finefin.api.Models.Entities
 {
