@@ -144,18 +144,18 @@ namespace RSC {
         /// <summary>
         ///   Looks up a localized string similar to Couldn&apos;t register more than 100 occurrences for a transaction..
         /// </summary>
-        public static string RECURRENCY_OCCURRENCIES_MAX {
+        public static string RECURRENCE_OCCURRENCIES_MAX {
             get {
-                return ResourceManager.GetString("RECURRENCY_OCCURRENCIES_MAX", resourceCulture);
+                return ResourceManager.GetString("RECURRENCE_OCCURRENCIES_MAX", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid recrrency type..
+        ///   Looks up a localized string similar to Invalid recrrence type..
         /// </summary>
-        public static string RECURRENCY_TYPE_INVALID {
+        public static string RECURRENCE_TYPE_INVALID {
             get {
-                return ResourceManager.GetString("RECURRENCY_TYPE_INVALID", resourceCulture);
+                return ResourceManager.GetString("RECURRENCE_TYPE_INVALID", resourceCulture);
             }
         }
         

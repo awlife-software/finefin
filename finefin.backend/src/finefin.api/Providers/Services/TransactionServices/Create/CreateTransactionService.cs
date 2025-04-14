@@ -12,16 +12,16 @@ namespace finefin.api.Providers.Services.TransactionServices.Create
     public class CreateTransactionService : ICreateTransactionService
     {
         private readonly ITransactionRepository _transactionRepository;
-        private readonly IRecurrencyRepository _recurrencyRepository;
+        private readonly IRecurrenceRepository _recurrenceRepository;
         private readonly IWalletRepository _walletRepository;
         private readonly ICreateTransactionValidation _validator;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public CreateTransactionService(ITransactionRepository transactionRepository, IRecurrencyRepository recurrencyRepository, IWalletRepository walletRepository, ICreateTransactionValidation validator, IUnitOfWork unitOfWork, IMapper mapper)
+        public CreateTransactionService(ITransactionRepository transactionRepository, IRecurrenceRepository recurrenceRepository, IWalletRepository walletRepository, ICreateTransactionValidation validator, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _transactionRepository = transactionRepository;
-            _recurrencyRepository = recurrencyRepository;
+            _recurrenceRepository = recurrenceRepository;
             _walletRepository = walletRepository;
             _validator = validator;
             _unitOfWork = unitOfWork;
@@ -39,16 +39,16 @@ namespace finefin.api.Providers.Services.TransactionServices.Create
 
             var transaction = _mapper.Map<Transaction>(request);
 
-            var recurrency = await _recurrencyRepository.CreateAndGetAsync(_mapper.Map<Recurrency>(transaction.Recurrency));
+            var recurrence = await _recurrenceRepository.CreateAndGetAsync(_mapper.Map<Recurrence>(transaction.Recurrence));
 
-            transaction.RecurrencyId = recurrency.Id;
+            transaction.RecurrenceId = recurrence.Id;
 
-            for(var i = 1; i <= transaction.Recurrency!.Occurrences; i++)
+            for(var i = 1; i <= transaction.Recurrence!.Occurrences; i++)
             {
                 if(i > 1)
                 {
                     transaction.IsCompleted = false;
-                    await HandleRecurrency(transaction, i);
+                    await HandleRecurrence(transaction, i);
 
                 }
                 else
@@ -70,20 +70,20 @@ namespace finefin.api.Providers.Services.TransactionServices.Create
             }
         }
 
-        private async Task HandleRecurrency(Transaction transaction, int index)
+        private async Task HandleRecurrence(Transaction transaction, int index)
         {
             var value = index - 1;
 
-            if (transaction.Recurrency!.Type == RecurrencyType.DAYLI.ToString())
+            if (transaction.Recurrence!.Type == RecurrenceType.DAYLI.ToString())
                 transaction.DueDate = transaction.DueDate.AddDays(value);
 
-            if (transaction.Recurrency!.Type == RecurrencyType.WEEKLY.ToString())
+            if (transaction.Recurrence!.Type == RecurrenceType.WEEKLY.ToString())
                 transaction.DueDate = transaction.DueDate.AddDays(value * 7);
 
-            if (transaction.Recurrency!.Type == RecurrencyType.MONTHLY.ToString())
+            if (transaction.Recurrence!.Type == RecurrenceType.MONTHLY.ToString())
                 transaction.DueDate = transaction.DueDate.AddMonths(value);
 
-            if (transaction.Recurrency!.Type == RecurrencyType.YEARLY.ToString())
+            if (transaction.Recurrence!.Type == RecurrenceType.YEARLY.ToString())
                 transaction.DueDate = transaction.DueDate.AddYears(value);
 
 

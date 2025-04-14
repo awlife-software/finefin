@@ -15,16 +15,16 @@ namespace finefin.api.Providers.Validation.Transaction
             RuleFor(x => x.Amount)
                 .GreaterThan(decimal.Zero)
                 .WithMessage(RSC.ResourceMessageException.TRANSACTION_AMOUNT_INVALID);
-            RuleFor(x => x.Recurrency!.Type)
-                .Must(BeAValidRecurrencyType)
-                .WithMessage(RSC.ResourceMessageException.RECURRENCY_TYPE_INVALID);
-            RuleFor(x => x.Recurrency!.Occurrences)
+            RuleFor(x => x.Recurrence!.Type)
+                .Must(BeAValidRecurrenceType)
+                .WithMessage(RSC.ResourceMessageException.RECURRENCE_TYPE_INVALID);
+            RuleFor(x => x.Recurrence!.Occurrences)
                 .LessThanOrEqualTo(100)
-                .WithMessage(RSC.ResourceMessageException.RECURRENCY_OCCURRENCIES_MAX);
+                .WithMessage(RSC.ResourceMessageException.RECURRENCE_OCCURRENCIES_MAX);
         }
 
 
         private bool BeAValidTransactionType(string type) => Enum.TryParse<TransactionType>(type, out _);
-        private bool BeAValidRecurrencyType(string type) => Enum.TryParse<RecurrencyType>(type, out _);
+        private bool BeAValidRecurrenceType(string type) => Enum.TryParse<RecurrenceType>(type, out _);
     }
 }

@@ -18,7 +18,7 @@ namespace finefin.api.Providers.Mapper
 
             CreateMap<CreateWalletRequest, Wallet>();
             CreateMap<CreateTransactionRequest, Transaction>();
-            CreateMap<RecurrencyRequest, Recurrency>();
+            CreateMap<RecurrenceRequest, Recurrence>();
         }
     }
 }

@@ -144,11 +144,11 @@
   <data name="PASSWORD_INVALID" xml:space="preserve">
     <value>Password must be at least 6 characters long and include at least one uppercase letter, one lowercase letter, and one special character.</value>
   </data>
-  <data name="RECURRENCY_OCCURRENCIES_MAX" xml:space="preserve">
+  <data name="RECURRENCE_OCCURRENCIES_MAX" xml:space="preserve">
     <value>Couldn't register more than 100 occurrences for a transaction.</value>
   </data>
-  <data name="RECURRENCY_TYPE_INVALID" xml:space="preserve">
-    <value>Invalid recrrency type.</value>
+  <data name="RECURRENCE_TYPE_INVALID" xml:space="preserve">
+    <value>Invalid recrrence type.</value>
   </data>
   <data name="TRANSACTION_AMOUNT_INVALID" xml:space="preserve">
     <value>Amount should be greater than zero.</value>

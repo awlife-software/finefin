@@ -29,7 +29,7 @@ namespace finefin.api.Extensions
         {
             services.AddScoped<IWalletRepository, WalletRepository>();
             services.AddScoped<ITransactionRepository, TransactionRepository>();
-            services.AddScoped<IRecurrencyRepository, RecurrencyRepository>();
+            services.AddScoped<IRecurrenceRepository, RecurrenceRepository>();
         }
     }
 }

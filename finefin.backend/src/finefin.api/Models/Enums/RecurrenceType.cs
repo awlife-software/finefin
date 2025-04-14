@@ -1,6 +1,6 @@
 ﻿namespace finefin.api.Models.Enums
 {
-    public enum RecurrencyType
+    public enum RecurrenceType
     {
         SINGLE = 0,
         DAYLI = 1,
