@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using finefin.api.Data;
 
@@ -11,9 +12,11 @@ using finefin.api.Data;
 namespace finefin.api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250409004751_ExcludeIsFixedFromTransaction")]
+    partial class ExcludeIsFixedFromTransaction
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace finefin.api.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("finefin.api.Models.Entities.Recurrence", b =>
+            modelBuilder.Entity("finefin.api.Models.Entities.Recurrency", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -49,7 +52,7 @@ namespace finefin.api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TB_RECURRENCE", (string)null);
+                    b.ToTable("TB_RECURRENCY", (string)null);
                 });
 
             modelBuilder.Entity("finefin.api.Models.Entities.Transaction", b =>
@@ -76,9 +79,13 @@ namespace finefin.api.Migrations
                         .HasColumnType("bit")
                         .HasColumnName("TRN_COMPLETED");
 
-                    b.Property<Guid?>("RecurrenceId")
+                    b.Property<bool>("IsRecurring")
+                        .HasColumnType("bit")
+                        .HasColumnName("TRN_RECURRING");
+
+                    b.Property<Guid?>("RecurrencyId")
                         .HasColumnType("uniqueidentifier")
-                        .HasColumnName("TRN_RECURRENCE_ID");
+                        .HasColumnName("TRN_RECURRENCY_ID");
 
                     b.Property<string>("Type")
                         .IsRequired()
@@ -96,7 +103,7 @@ namespace finefin.api.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RecurrenceId");
+                    b.HasIndex("RecurrencyId");
 
                     b.HasIndex("WalletId");
 
@@ -273,9 +280,9 @@ namespace finefin.api.Migrations
 
             modelBuilder.Entity("finefin.api.Models.Entities.Transaction", b =>
                 {
-                    b.HasOne("finefin.api.Models.Entities.Recurrence", "Recurrence")
+                    b.HasOne("finefin.api.Models.Entities.Recurrency", "Recurrency")
                         .WithMany("Transactions")
-                        .HasForeignKey("RecurrenceId");
+                        .HasForeignKey("RecurrencyId");
 
                     b.HasOne("finefin.api.Models.Entities.Wallet", "Wallet")
                         .WithMany("Transactions")
@@ -283,7 +290,7 @@ namespace finefin.api.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Recurrence");
+                    b.Navigation("Recurrency");
 
                     b.Navigation("Wallet");
                 });
@@ -318,7 +325,7 @@ namespace finefin.api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("finefin.api.Models.Entities.Recurrence", b =>
+            modelBuilder.Entity("finefin.api.Models.Entities.Recurrency", b =>
                 {
                     b.Navigation("Transactions");
                 });

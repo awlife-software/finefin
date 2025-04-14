@@ -3,8 +3,8 @@ using valet.lib.Core.Domain.Interfaces;
 
 namespace finefin.api.Data.Repositories.Interfaces
 {
-    public interface IWalletRepository : IRepository<Wallet>
+    public interface IRecurrenceRepository : IRepository<Recurrence>
     {
-        Task<bool> WalletBelongsToUser(Guid walletId, Guid userId);
+        Task<Recurrence> CreateAndGetAsync(Recurrence recurrence);
     }
 }

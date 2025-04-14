@@ -1,5 +1,6 @@
 ﻿using finefin.api.Models.Enums;
 using System.ComponentModel.DataAnnotations;
+using valet.lib.Core.Domain.Entities;
 
 namespace finefin.api.Models.Entities
 {
@@ -8,12 +9,10 @@ namespace finefin.api.Models.Entities
         [EnumDataType(typeof(TransactionType))]
         public string Type { get; set; } = string.Empty;
         public decimal Amount { get; set; } = decimal.Zero;
-        public DateTime DueDate { get; set; } = DateTime.UtcNow;
+        public DateTime DueDate { get; set; } = DateTime.UtcNow.Date;
         public bool IsCompleted { get; set; }
-        public bool IsFixed { get; set; }
-        public bool IsRecurring { get; set; }
-        public virtual Recurrency? Recurrency { get; set; }
-        public Guid? RecurrencyId { get; set; }
+        public virtual Recurrence? Recurrence { get; set; }
+        public Guid? RecurrenceId { get; set; }
         public virtual Wallet? Wallet { get; set; }
         public Guid WalletId { get; set; }
 

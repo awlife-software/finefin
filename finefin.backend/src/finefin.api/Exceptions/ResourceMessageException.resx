@@ -144,6 +144,18 @@
   <data name="PASSWORD_INVALID" xml:space="preserve">
     <value>Password must be at least 6 characters long and include at least one uppercase letter, one lowercase letter, and one special character.</value>
   </data>
+  <data name="RECURRENCE_OCCURRENCIES_MAX" xml:space="preserve">
+    <value>Couldn't register more than 100 occurrences for a transaction.</value>
+  </data>
+  <data name="RECURRENCE_TYPE_INVALID" xml:space="preserve">
+    <value>Invalid recrrence type.</value>
+  </data>
+  <data name="TRANSACTION_AMOUNT_INVALID" xml:space="preserve">
+    <value>Amount should be greater than zero.</value>
+  </data>
+  <data name="TRANSACTION_TYPE_INVALID" xml:space="preserve">
+    <value>Invalid transaction type.</value>
+  </data>
   <data name="UNKNOW_ERROR" xml:space="preserve">
     <value>Unknow error.</value>
   </data>
@@ -157,6 +169,9 @@
     <value>Wallet name must have at least 2 and maximum of 20 characters.</value>
   </data>
   <data name="WALLET_TYPE_INVALID" xml:space="preserve">
-    <value>Wallet type invalid.</value>
+    <value>Invalid wallet type.</value>
+  </data>
+  <data name="WALLET_USER_AUTHORIZATION" xml:space="preserve">
+    <value>Wallet don't belongs to user.</value>
   </data>
 </root>

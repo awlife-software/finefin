@@ -8,7 +8,7 @@ namespace finefin.api.Data
     {
         public DbSet<Wallet> Wallets { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
-        public DbSet<Recurrency> Recurrencies { get; set; }
+        public DbSet<Recurrence> Recurrencies { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

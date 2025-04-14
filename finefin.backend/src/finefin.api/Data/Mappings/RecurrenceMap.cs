@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace finefin.api.Data.Mappings
 {
-    public class RecurrencyMap : IEntityTypeConfiguration<Recurrency>
+    public class RecurrenceMap : IEntityTypeConfiguration<Recurrence>
     {
-        public void Configure(EntityTypeBuilder<Recurrency> builder)
+        public void Configure(EntityTypeBuilder<Recurrence> builder)
         {
-            builder.ToTable("TB_RECURRENCY").HasKey(x => x.Id);
+            builder.ToTable("TB_RECURRENCE").HasKey(x => x.Id);
 
             builder.Property(x => x.Id).HasColumnName("RCR_ID");
             builder.Property(x => x.CreatedAt).HasColumnName("RCR_CREATED_AT");
