@@ -24,7 +24,7 @@ namespace finefin.api.Controllers
 
             await service.CreateWallet(userId!, request);
 
-            return Created();
+            return Created(string.Empty, null);
         }
     }
 }
