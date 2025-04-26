@@ -12,9 +12,11 @@ namespace finefin.test._02._IntegrationTests
     {
         private LocalUser _user = default!;
         private string _password = string.Empty;
+        private Wallet _wallet = default!;
 
         public string GetEmail() => _user.Email;
         public string GetPassword() => _password;
+        public Wallet GetWallet() => _wallet;
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
@@ -48,6 +50,14 @@ namespace finefin.test._02._IntegrationTests
             (_user, _password) = UserBuilder.Build();
 
             context.Users.Add(_user);
+            context.SaveChanges();
+
+            var user = context.Users.FirstOrDefault();
+
+            _wallet = WalletBuilder.Build();
+            _wallet.UserId = user!.Id;
+
+            context.Wallets.Add(_wallet);
             context.SaveChanges();
         }
 
