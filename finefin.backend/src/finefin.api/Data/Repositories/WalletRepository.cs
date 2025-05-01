@@ -8,5 +8,6 @@ namespace finefin.api.Data.Repositories
     public class WalletRepository(AppDbContext db) :  Repository<Wallet>(db), IWalletRepository
     {
         public async Task<bool> WalletBelongsToUser(Guid walletId, Guid userId) => await dbSet.AnyAsync(x => x.Id == walletId && x.UserId == userId);
+        
     }
 }

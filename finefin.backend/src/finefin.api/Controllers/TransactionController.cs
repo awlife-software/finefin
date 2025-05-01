@@ -25,7 +25,7 @@ namespace finefin.api.Controllers
 
             await service.CreateTransaction(userId!, request);
 
-            return Created("", null);
+            return Created(string.Empty, null);
         }
     }
 }

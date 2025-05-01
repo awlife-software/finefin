@@ -38,6 +38,7 @@ namespace finefin.api.Providers.Services.TransactionServices.Create
                 throw new WalletDontBelongToUserException();
 
             var transaction = _mapper.Map<Transaction>(request);
+            var wallet = await _walletRepository.GetAsync(x => x.Id == request.WalletId);
 
             var recurrence = await _recurrenceRepository.CreateAndGetAsync(_mapper.Map<Recurrence>(transaction.Recurrence));
 
@@ -49,11 +50,11 @@ namespace finefin.api.Providers.Services.TransactionServices.Create
                 {
                     transaction.IsCompleted = false;
                     await HandleRecurrence(transaction, i);
-
                 }
                 else
                 {
                     await _transactionRepository.CreateAsync(transaction);
+                    HandleBalance(wallet, transaction);
                     await _unitOfWork.Commit();
                 }
             }
@@ -90,6 +91,19 @@ namespace finefin.api.Providers.Services.TransactionServices.Create
             transaction.Id = Guid.NewGuid();
             await _transactionRepository.CreateAsync(transaction);
             await _unitOfWork.Commit();
+        }
+
+        private void HandleBalance(Wallet wallet, Transaction transaction)
+        {
+            if (transaction.IsCompleted)
+            {
+                if (transaction.Type == TransactionType.INCOME.ToString())
+                    wallet.Balance += transaction.Amount;
+                else
+                    wallet.Balance -= transaction.Amount;
+
+                _walletRepository.Update(wallet);
+            }
         }
     }
 }
