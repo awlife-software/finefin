@@ -1,5 +1,7 @@
 ﻿using finefin.api.Providers.Mapper;
 using finefin.api.Providers.Services.TransactionServices.Create;
+using finefin.api.Providers.Services.TransactionServices.Get;
+using finefin.api.Providers.Services.TransactionServices.Update;
 using finefin.api.Providers.Services.UserServices.Login;
 using finefin.api.Providers.Services.UserServices.Register;
 using finefin.api.Providers.Services.WalletServices.Create;
@@ -27,6 +29,8 @@ namespace finefin.api.Extensions
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<ICreateWalletService, CreateWalletService>();
             services.AddScoped<ICreateTransactionService, CreateTransactionService>();
+            services.AddScoped<IGetTransactionService, GetTransactionService>();
+            services.AddScoped<IUpdateTransactionService, UpdateTransactionService>();
         }
 
         private static void AddExtraProviders(this IServiceCollection services)

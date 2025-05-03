@@ -16,6 +16,7 @@ namespace finefin.api.Providers.Services.DashboardServices
 
         public async Task<SummaryResponse> GetSummary(string userId)
         {
+            throw new NotImplementedException();
             var guid = Guid.Parse(userId);
 
             var balance = await _walletRepository.GetAllAsync(x => x.UserId.Equals(guid));
