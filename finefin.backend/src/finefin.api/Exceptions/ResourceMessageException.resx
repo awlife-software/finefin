@@ -132,6 +132,9 @@
   <data name="FIRSTNAME_LENGTH" xml:space="preserve">
     <value>Firts name should have between 2 and 30 characters.</value>
   </data>
+  <data name="INVALID_ID" xml:space="preserve">
+    <value>Invalid id.</value>
+  </data>
   <data name="LASTNAME_EMPTY" xml:space="preserve">
     <value>Last name cannot be empty.</value>
   </data>

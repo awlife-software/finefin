@@ -4,6 +4,6 @@ namespace finefin.api.Providers.Services.TransactionServices.Update
 {
     public interface IUpdateTransactionService
     {
-        Task<CompleteTransactionResponse> CompleteTransaction(string userId, string transactionId);
+        Task CompleteTransaction(string userId, string transactionId);
     }
 }

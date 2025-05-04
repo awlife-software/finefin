@@ -132,6 +132,9 @@
   <data name="FIRSTNAME_LENGTH" xml:space="preserve">
     <value>O nome deve ter de 2 a 30 caracteres.</value>
   </data>
+  <data name="INVALID_ID" xml:space="preserve">
+    <value>Id inválido.</value>
+  </data>
   <data name="LASTNAME_EMPTY" xml:space="preserve">
     <value>Sobrenome não pode estar vazio.</value>
   </data>

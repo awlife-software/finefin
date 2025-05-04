@@ -29,7 +29,7 @@ namespace finefin.api.Controllers
             return Created(string.Empty, null);
         }
 
-        [HttpGet("pendingForUser")]
+        [HttpGet("pending/user")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
@@ -39,12 +39,10 @@ namespace finefin.api.Controllers
         {
             var userId = HttpContext.User.FindFirst(ClaimTypes.Sid)?.Value;
 
-            var pendingTransactions = await service.GetAllPendingTransactionsForUser(userId!);
-
-            return Ok(pendingTransactions);
+            return Ok(await service.GetAllPendingTransactionsForUser(userId!));
         }
 
-        [HttpGet("pendingForWallet")]
+        [HttpGet("pending/wallet/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
@@ -54,9 +52,7 @@ namespace finefin.api.Controllers
         {
             var userId = HttpContext.User.FindFirst(ClaimTypes.Sid)?.Value;
 
-            var pendingTransactions = await service.GetAllPendingTransactionsForWallet(walletId, userId!);
-
-            return Ok(pendingTransactions);
+            return Ok(await service.GetAllPendingTransactionsForWallet(walletId, userId!));
         }
     }
 }

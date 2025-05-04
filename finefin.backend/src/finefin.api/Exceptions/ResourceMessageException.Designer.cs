@@ -106,6 +106,15 @@ namespace RSC {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid id..
+        /// </summary>
+        public static string INVALID_ID {
+            get {
+                return ResourceManager.GetString("INVALID_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last name cannot be empty..
         /// </summary>
         public static string LASTNAME_EMPTY {
