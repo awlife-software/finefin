@@ -106,6 +106,15 @@ namespace RSC {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t complete this operation due to insufficient funds..
+        /// </summary>
+        public static string INSUFFICIENT_FUNDS {
+            get {
+                return ResourceManager.GetString("INSUFFICIENT_FUNDS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid id..
         /// </summary>
         public static string INVALID_ID {
@@ -142,6 +151,15 @@ namespace RSC {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Multiple type transactions defined on recurrence should have more at least 2 occurrences..
+        /// </summary>
+        public static string MULTIPLE_RECURRENCE_INVALID {
+            get {
+                return ResourceManager.GetString("MULTIPLE_RECURRENCE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password must be at least 6 characters long and include at least one uppercase letter, one lowercase letter, and one special character..
         /// </summary>
         public static string PASSWORD_INVALID {
@@ -165,6 +183,15 @@ namespace RSC {
         public static string RECURRENCE_TYPE_INVALID {
             get {
                 return ResourceManager.GetString("RECURRENCE_TYPE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Single type transactions defined on recurrence should have 1 occurrence;.
+        /// </summary>
+        public static string SINGLE_RECURRENCE_INVALID {
+            get {
+                return ResourceManager.GetString("SINGLE_RECURRENCE_INVALID", resourceCulture);
             }
         }
         

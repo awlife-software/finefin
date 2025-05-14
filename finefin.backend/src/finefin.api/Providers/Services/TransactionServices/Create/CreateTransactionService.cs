@@ -37,6 +37,9 @@ namespace finefin.api.Providers.Services.TransactionServices.Create
             if (!userIsValid)
                 throw new WalletDontBelongToUserException();
 
+            if (request.Type == TransactionType.EXPENSE.ToString())
+                await ValidateExpense(request);
+
             var transaction = _mapper.Map<Transaction>(request);
             var wallet = await _walletRepository.GetAsync(x => x.Id == request.WalletId);
 
@@ -103,6 +106,17 @@ namespace finefin.api.Providers.Services.TransactionServices.Create
                     wallet.Balance -= transaction.Amount;
 
                 _walletRepository.Update(wallet);
+            }
+        }
+
+        private async Task ValidateExpense(CreateTransactionRequest request)
+        {
+            if (request.IsCompleted)
+            {
+                var balance = await _walletRepository.GetWalletBalance(request.WalletId);
+
+                if (request.Amount > balance)
+                    throw new InsufficientFundsException();
             }
         }
     }

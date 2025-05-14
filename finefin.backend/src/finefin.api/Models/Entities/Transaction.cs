@@ -11,6 +11,7 @@ namespace finefin.api.Models.Entities
         public decimal Amount { get; set; } = decimal.Zero;
         public DateTime DueDate { get; set; } = DateTime.UtcNow.Date;
         public bool IsCompleted { get; set; }
+        public DateTime CompletionDate { get; set; }
         public virtual Recurrence? Recurrence { get; set; }
         public Guid? RecurrenceId { get; set; }
         public virtual Wallet? Wallet { get; set; }

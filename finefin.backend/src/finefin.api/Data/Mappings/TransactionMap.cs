@@ -17,6 +17,7 @@ namespace finefin.api.Data.Mappings
             builder.Property(x => x.Amount).HasColumnName("TRN_AMOUNT").HasPrecision(18,4);
             builder.Property(x => x.DueDate).HasColumnName("TRN_DUEDATE");
             builder.Property(x => x.IsCompleted).HasColumnName("TRN_COMPLETED");
+            builder.Property(x => x.CompletionDate).HasColumnName("TRN_COMPLETION_DATE");
             builder.Property(x => x.RecurrenceId).HasColumnName("TRN_RECURRENCE_ID");
             builder.Property(x => x.WalletId).HasColumnName("TRN_WALLET_ID");
 

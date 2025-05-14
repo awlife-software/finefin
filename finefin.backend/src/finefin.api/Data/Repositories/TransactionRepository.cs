@@ -16,5 +16,10 @@ namespace finefin.api.Data.Repositories
         public async Task<List<Transaction>> GetAllPendingTransactionsForWalletAsync(Guid walletId) => await dbSet
             .Include(x => x.Recurrence)
             .Where(x => !x.IsCompleted && x.DueDate.Date <= DateTime.Today && x.WalletId == walletId).ToListAsync();
+
+        public async Task<Transaction> GetTransactionWithDependencies(Guid transactionId) => await dbSet
+            .Include(x => x.Wallet)
+            .Include(x => x.Recurrence)
+            .FirstAsync(x => x.Id == transactionId);
     }
 }

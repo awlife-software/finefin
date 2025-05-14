@@ -132,6 +132,9 @@
   <data name="FIRSTNAME_LENGTH" xml:space="preserve">
     <value>Firts name should have between 2 and 30 characters.</value>
   </data>
+  <data name="INSUFFICIENT_FUNDS" xml:space="preserve">
+    <value>Can't complete this operation due to insufficient funds.</value>
+  </data>
   <data name="INVALID_ID" xml:space="preserve">
     <value>Invalid id.</value>
   </data>
@@ -144,6 +147,9 @@
   <data name="LOGIN_INVALID" xml:space="preserve">
     <value>Email or password invalid.</value>
   </data>
+  <data name="MULTIPLE_RECURRENCE_INVALID" xml:space="preserve">
+    <value>Multiple type transactions defined on recurrence should have more at least 2 occurrences.</value>
+  </data>
   <data name="PASSWORD_INVALID" xml:space="preserve">
     <value>Password must be at least 6 characters long and include at least one uppercase letter, one lowercase letter, and one special character.</value>
   </data>
@@ -152,6 +158,9 @@
   </data>
   <data name="RECURRENCE_TYPE_INVALID" xml:space="preserve">
     <value>Invalid recrrence type.</value>
+  </data>
+  <data name="SINGLE_RECURRENCE_INVALID" xml:space="preserve">
+    <value>Single type transactions defined on recurrence should have 1 occurrence;</value>
   </data>
   <data name="TRANSACTION_AMOUNT_INVALID" xml:space="preserve">
     <value>Amount should be greater than zero.</value>
