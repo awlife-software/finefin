@@ -61,6 +61,24 @@ namespace RSC {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The maximum description length is 50 characters..
+        /// </summary>
+        public static string DESCRIPTION_MAX_LENGTH {
+            get {
+                return ResourceManager.GetString("DESCRIPTION_MAX_LENGTH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description must have at least 4 characters..
+        /// </summary>
+        public static string DESCRIPTION_MIN_LENGTH {
+            get {
+                return ResourceManager.GetString("DESCRIPTION_MIN_LENGTH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email cannot be empty..
         /// </summary>
         public static string EMAIL_EMPTY {

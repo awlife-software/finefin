@@ -46,6 +46,8 @@ namespace finefin.api.Providers.Services.TransactionServices.Update
 
         public async Task UpdateTransaction(string userId, UpdateTransactionRequest request)
         {
+            // TODO: VALIDATE
+
             var entity = await _transactionRepository.GetTransactionWithDependencies(request.TransactionId)
                 ?? throw new InvalidIdException();
 
@@ -57,9 +59,28 @@ namespace finefin.api.Providers.Services.TransactionServices.Update
             if (entity.Type == TransactionType.EXPENSE.ToString())
                 await ValidateExpense(request, entity.WalletId);
 
+
+            // HANDLE RECURRENCES
             entity.HandleCompetionAndBalance(request);
+            entity.HandleFirstOccurrence(request);
 
             _transactionRepository.Update(entity);
+
+            if (entity.Recurrence!.Occurrences > 1 && request.RecurrenceOption == UpdateRecurrenceOption.All)
+            {
+                var list = await _transactionRepository.GetTransactionListWithDependencies(request.TransactionId, entity.DueDate.Date);
+
+                var index = 1;
+
+                list.ForEach(x => 
+                {
+                    x.HandleRecurrences(request, index);
+                    index++;
+                });
+
+                _transactionRepository.UpdateRange(list);
+            }
+
             await _unitOfWork.Commit();
         }
         // TODO: OTIMIZAR E REAPROVEITAR MÉTODOS

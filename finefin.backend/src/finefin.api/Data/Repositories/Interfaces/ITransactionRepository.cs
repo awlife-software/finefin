@@ -8,5 +8,7 @@ namespace finefin.api.Data.Repositories.Interfaces
         Task<List<Transaction>> GetAllPendingTransactionsForUserAsync(Guid userId);
         Task<List<Transaction>> GetAllPendingTransactionsForWalletAsync(Guid walletId);
         Task<Transaction> GetTransactionWithDependencies(Guid transactionId);
+        Task<List<Transaction>> GetTransactionListWithDependencies(Guid recurrenceId, DateTime dueDate);
+        void UpdateRange(List<Transaction> transactions);
     }
 }

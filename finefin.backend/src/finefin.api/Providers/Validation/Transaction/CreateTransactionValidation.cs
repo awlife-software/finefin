@@ -22,6 +22,13 @@ namespace finefin.api.Providers.Validation.Transaction
             RuleFor(x => x.Recurrence.Occurrences)
                 .LessThanOrEqualTo(100)
                 .WithMessage(RSC.ResourceMessageException.RECURRENCE_OCCURRENCIES_MAX);
+            RuleFor(x => x.Description)
+                .MaximumLength(50)
+                .WithMessage(RSC.ResourceMessageException.DESCRIPTION_MAX_LENGTH);
+            RuleFor(x => x.Description)
+                .MinimumLength(4)
+                .WithMessage(RSC.ResourceMessageException.DESCRIPTION_MIN_LENGTH);
+
             When(x => x.Recurrence.Type == RecurrenceType.SINGLE.ToString(), () =>
             {
                 RuleFor(x => x.Recurrence.Occurrences).Must(x => x.Equals(1)).WithMessage(RSC.ResourceMessageException.SINGLE_RECURRENCE_INVALID);

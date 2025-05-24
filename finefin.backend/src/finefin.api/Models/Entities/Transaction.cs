@@ -6,6 +6,8 @@ namespace finefin.api.Models.Entities
 {
     public class Transaction : BaseEntity
     {
+        public string Description { get; set; } = string.Empty;
+
         [EnumDataType(typeof(TransactionType))]
         public string Type { get; set; } = string.Empty;
         public decimal Amount { get; set; } = decimal.Zero;
