@@ -1,8 +1,6 @@
-﻿using Azure.Core;
-using finefin.api.Data.Repositories.Interfaces;
+﻿using finefin.api.Data.Repositories.Interfaces;
 using finefin.api.Exceptions;
 using finefin.api.Http.Requests;
-using finefin.api.Http.Responses;
 using finefin.api.Models.Entities;
 using finefin.api.Models.Enums;
 using valet.lib.Core.Domain.Interfaces;
@@ -68,7 +66,7 @@ namespace finefin.api.Providers.Services.TransactionServices.Update
 
             if (entity.Recurrence!.Occurrences > 1 && request.RecurrenceOption == UpdateRecurrenceOption.All)
             {
-                var list = await _transactionRepository.GetTransactionListWithDependencies(request.TransactionId, entity.DueDate.Date);
+                var list = await _transactionRepository.GetRecurrenceTransactions(entity.RecurrenceId, entity.DueDate.Date);
 
                 var index = 1;
 

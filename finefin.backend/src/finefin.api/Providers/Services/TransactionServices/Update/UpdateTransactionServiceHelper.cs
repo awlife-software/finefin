@@ -8,6 +8,7 @@ namespace finefin.api.Providers.Services.TransactionServices.Update
     {
         public static void HandleCompetionAndBalance(this Transaction entity, UpdateTransactionRequest request)
         {
+            // UNCONFIRM TRANSACTION
             if (entity.IsCompleted && !request.IsCompleted)
             {
                 entity.IsCompleted = false;
@@ -20,6 +21,7 @@ namespace finefin.api.Providers.Services.TransactionServices.Update
                 entity.Amount = request.Amount;
             }
 
+            // CONFIRM TRANSACTION
             if (!entity.IsCompleted && request.IsCompleted)
             {
                 entity.IsCompleted = true; // complete
@@ -32,9 +34,10 @@ namespace finefin.api.Providers.Services.TransactionServices.Update
                     entity.Wallet!.Balance -= entity.Amount;
             }
 
-            if (entity.IsCompleted.Equals(request.IsCompleted)) // equal
+            // MAITAIN TRANSACTION
+            if (entity.IsCompleted.Equals(request.IsCompleted))
             {
-                if (!entity.Amount.Equals(request.Amount)) // equal
+                if (!entity.Amount.Equals(request.Amount)) // AMOUNT UPDATE CHECK
                 {
                     if (entity.IsCompleted)
                     {
@@ -70,6 +73,8 @@ namespace finefin.api.Providers.Services.TransactionServices.Update
             entity.DueDate = HandleOccurrenceDate(entity.Recurrence!.Type.ToString(), request.DueDate, occurrence);
 
             entity.Description = request.Description;
+
+            entity.Amount = request.Amount;
         }
 
         private static DateTime HandleOccurrenceDate(string type, DateTime date, int index)

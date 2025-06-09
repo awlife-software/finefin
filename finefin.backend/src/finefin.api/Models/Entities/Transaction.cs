@@ -15,7 +15,7 @@ namespace finefin.api.Models.Entities
         public bool IsCompleted { get; set; }
         public DateTime CompletionDate { get; set; }
         public virtual Recurrence? Recurrence { get; set; }
-        public Guid? RecurrenceId { get; set; }
+        public Guid RecurrenceId { get; set; }
         public virtual Wallet? Wallet { get; set; }
         public Guid WalletId { get; set; }
 
