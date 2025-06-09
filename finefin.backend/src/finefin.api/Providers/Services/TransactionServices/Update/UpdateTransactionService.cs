@@ -24,7 +24,9 @@ namespace finefin.api.Providers.Services.TransactionServices.Update
 
         public async Task CompleteTransaction(string userId, string transactionId)
         {
-            var transaction = await _transactionRepository.GetAsync(x => x.Id.ToString() == transactionId) 
+            // TODO: VALIDATE IF TRANSACTION IS ALREADY COMPLETED
+
+            var transaction = await _transactionRepository.GetTransactionWithDependencies(Guid.Parse(transactionId)) 
                 ?? throw new InvalidIdException();
 
             var isValid = await _walletRepository.WalletBelongsToUser(transaction.WalletId, Guid.Parse(userId));
@@ -33,7 +35,9 @@ namespace finefin.api.Providers.Services.TransactionServices.Update
                 throw new WalletDontBelongToUserException();
             // VALIDATE BALANCE
             if (transaction.Type == TransactionType.EXPENSE.ToString())
-                await ValidateCompletionOnExpense(transaction, transaction.WalletId);
+                await ValidateExpenseOnCompletion(transaction, transaction.WalletId);
+
+            transaction.HandleBalanceOnCompletion();
 
             transaction.IsCompleted = true;
             transaction.CompletionDate = DateTime.UtcNow;
@@ -93,7 +97,7 @@ namespace finefin.api.Providers.Services.TransactionServices.Update
             }
         }
 
-        private async Task ValidateCompletionOnExpense(Transaction transaction, Guid walletId)
+        private async Task ValidateExpenseOnCompletion(Transaction transaction, Guid walletId)
         {
             var balance = await _walletRepository.GetWalletBalance(walletId);
 
@@ -101,5 +105,6 @@ namespace finefin.api.Providers.Services.TransactionServices.Update
                 throw new InsufficientFundsException();
 
         }
+
     }
 }

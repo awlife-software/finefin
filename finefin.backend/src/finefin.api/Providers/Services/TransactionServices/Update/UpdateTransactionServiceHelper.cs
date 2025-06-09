@@ -6,6 +6,7 @@ namespace finefin.api.Providers.Services.TransactionServices.Update
 {
     public static class UpdateTransactionServiceHelper
     {
+
         public static void HandleCompetionAndBalance(this Transaction entity, UpdateTransactionRequest request)
         {
             // UNCONFIRM TRANSACTION
@@ -92,6 +93,14 @@ namespace finefin.api.Providers.Services.TransactionServices.Update
                 return date.AddYears(index);
 
             return date;
+        }
+
+        public static void HandleBalanceOnCompletion(this Transaction transaction)
+        {
+            if (transaction.Type == TransactionType.INCOME.ToString())
+                transaction.Wallet!.Balance += transaction.Amount;
+            else
+                transaction.Wallet!.Balance -= transaction.Amount;
         }
     }
 }
