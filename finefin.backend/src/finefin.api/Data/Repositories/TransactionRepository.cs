@@ -17,9 +17,7 @@ namespace finefin.api.Data.Repositories
             .Include(x => x.Recurrence)
             .Where(x => !x.IsCompleted && x.DueDate.Date <= DateTime.Today && x.WalletId == walletId).ToListAsync();
 
-        public async Task<List<Transaction>> GetTransactionListWithDependencies(Guid recurrenceId, DateTime dueDate) => await dbSet
-            .Include(x => x.Wallet)
-            .Include(x => x.Recurrence)
+        public async Task<List<Transaction>> GetRecurrenceTransactions(Guid recurrenceId, DateTime dueDate) => await dbSet
             .Where(x => x.RecurrenceId == recurrenceId && !x.IsCompleted && x.DueDate.Date > dueDate)
             .ToListAsync();
 
