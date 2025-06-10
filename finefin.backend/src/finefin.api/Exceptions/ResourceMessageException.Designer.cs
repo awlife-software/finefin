@@ -214,6 +214,15 @@ namespace RSC {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This transaction is already completed..
+        /// </summary>
+        public static string TRANSACTION_ALREADY_COMPLETED {
+            get {
+                return ResourceManager.GetString("TRANSACTION_ALREADY_COMPLETED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Amount should be greater than zero..
         /// </summary>
         public static string TRANSACTION_AMOUNT_INVALID {

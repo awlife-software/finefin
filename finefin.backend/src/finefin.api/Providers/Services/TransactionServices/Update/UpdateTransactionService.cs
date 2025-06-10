@@ -24,16 +24,15 @@ namespace finefin.api.Providers.Services.TransactionServices.Update
 
         public async Task CompleteTransaction(string userId, string transactionId)
         {
-            // TODO: VALIDATE IF TRANSACTION IS ALREADY COMPLETED
-
             var transaction = await _transactionRepository.GetTransactionWithDependencies(Guid.Parse(transactionId)) 
                 ?? throw new InvalidIdException();
 
-            var isValid = await _walletRepository.WalletBelongsToUser(transaction.WalletId, Guid.Parse(userId));
+            if (transaction.IsCompleted)
+                throw new TransactionAlreadyCompletedException();
 
-            if (!isValid)
+            if (!await _walletRepository.WalletBelongsToUser(transaction.WalletId, Guid.Parse(userId)))
                 throw new WalletDontBelongToUserException();
-            // VALIDATE BALANCE
+
             if (transaction.Type == TransactionType.EXPENSE.ToString())
                 await ValidateExpenseOnCompletion(transaction, transaction.WalletId);
 
@@ -53,16 +52,12 @@ namespace finefin.api.Providers.Services.TransactionServices.Update
             var entity = await _transactionRepository.GetTransactionWithDependencies(request.TransactionId)
                 ?? throw new InvalidIdException();
 
-            var isValid = await _walletRepository.WalletBelongsToUser(entity.WalletId, Guid.Parse(userId));
-
-            if (!isValid)
+            if (!await _walletRepository.WalletBelongsToUser(entity.WalletId, Guid.Parse(userId)))
                 throw new WalletDontBelongToUserException();
 
             if (entity.Type == TransactionType.EXPENSE.ToString())
                 await ValidateExpense(request, entity.WalletId);
 
-
-            // HANDLE RECURRENCES
             entity.HandleCompetionAndBalance(request);
             entity.HandleFirstOccurrence(request);
 
@@ -85,6 +80,7 @@ namespace finefin.api.Providers.Services.TransactionServices.Update
 
             await _unitOfWork.Commit();
         }
+
         // TODO: OTIMIZAR E REAPROVEITAR MÉTODOS
         private async Task ValidateExpense(UpdateTransactionRequest request, Guid walletId)
         {

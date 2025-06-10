@@ -168,6 +168,9 @@
   <data name="SINGLE_RECURRENCE_INVALID" xml:space="preserve">
     <value>Single type transactions defined on recurrence should have 1 occurrence;</value>
   </data>
+  <data name="TRANSACTION_ALREADY_COMPLETED" xml:space="preserve">
+    <value>This transaction is already completed.</value>
+  </data>
   <data name="TRANSACTION_AMOUNT_INVALID" xml:space="preserve">
     <value>Amount should be greater than zero.</value>
   </data>
