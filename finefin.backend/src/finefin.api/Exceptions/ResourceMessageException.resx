@@ -162,6 +162,9 @@
   <data name="RECURRENCE_OCCURRENCIES_MAX" xml:space="preserve">
     <value>Couldn't register more than 100 occurrences for a transaction.</value>
   </data>
+  <data name="RECURRENCE_OPTION" xml:space="preserve">
+    <value>Invalid recurrence option.</value>
+  </data>
   <data name="RECURRENCE_TYPE_INVALID" xml:space="preserve">
     <value>Invalid recrrence type.</value>
   </data>

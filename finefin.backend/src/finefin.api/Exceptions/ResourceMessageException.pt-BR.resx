@@ -162,6 +162,9 @@
   <data name="RECURRENCE_OCCURRENCIES_MAX" xml:space="preserve">
     <value>Não podemos registrar mais de 100 ocorrências para uma transação.</value>
   </data>
+  <data name="RECURRENCE_OPTION" xml:space="preserve">
+    <value>Opção de recorrência inválida.</value>
+  </data>
   <data name="RECURRENCE_TYPE_INVALID" xml:space="preserve">
     <value>Tipo de recorrência inválido.</value>
   </data>

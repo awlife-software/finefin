@@ -3,6 +3,7 @@ using finefin.api.Exceptions;
 using finefin.api.Http.Requests;
 using finefin.api.Models.Entities;
 using finefin.api.Models.Enums;
+using finefin.api.Providers.Validation.Transaction.Interfaces;
 using valet.lib.Core.Domain.Interfaces;
 
 namespace finefin.api.Providers.Services.TransactionServices.Update
@@ -13,13 +14,15 @@ namespace finefin.api.Providers.Services.TransactionServices.Update
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWalletRepository _walletRepository;
         private readonly IRecurrenceRepository _recurrenceRepository;
+        private readonly IUpdateTransactionValidation _validator;
 
-        public UpdateTransactionService(ITransactionRepository transactionRepository, IUnitOfWork unitOfWork, IWalletRepository walletRepository, IRecurrenceRepository recurrenceRepository)
+        public UpdateTransactionService(ITransactionRepository transactionRepository, IUnitOfWork unitOfWork, IWalletRepository walletRepository, IRecurrenceRepository recurrenceRepository, IUpdateTransactionValidation validator)
         {
             _transactionRepository = transactionRepository;
             _unitOfWork = unitOfWork;
             _walletRepository = walletRepository;
             _recurrenceRepository = recurrenceRepository;
+            _validator = validator;
         }
 
         public async Task CompleteTransaction(string userId, string transactionId)
@@ -47,7 +50,7 @@ namespace finefin.api.Providers.Services.TransactionServices.Update
 
         public async Task UpdateTransaction(string userId, UpdateTransactionRequest request)
         {
-            // TODO: VALIDATE
+            await Validate(request);
 
             var entity = await _transactionRepository.GetTransactionWithDependencies(request.TransactionId)
                 ?? throw new InvalidIdException();
@@ -63,7 +66,7 @@ namespace finefin.api.Providers.Services.TransactionServices.Update
 
             _transactionRepository.Update(entity);
 
-            if (entity.Recurrence!.Occurrences > 1 && request.RecurrenceOption == UpdateRecurrenceOption.All)
+            if (entity.Recurrence!.Occurrences > 1 && request.RecurrenceOption == UpdateRecurrenceOption.All.ToString())
             {
                 var list = await _transactionRepository.GetRecurrenceTransactions(entity.RecurrenceId, entity.DueDate.Date);
 
@@ -101,6 +104,18 @@ namespace finefin.api.Providers.Services.TransactionServices.Update
                 throw new InsufficientFundsException();
 
         }
+
+        private async Task Validate(UpdateTransactionRequest request)
+        {
+            var result = await _validator.ValidateAsync(request);
+
+            if (!result.IsValid)
+            {
+                var errors = result.Errors.Select(x => x.ErrorMessage).ToList();
+                throw new ErrorOnValidationException(errors);
+            }
+        }
+
 
     }
 }

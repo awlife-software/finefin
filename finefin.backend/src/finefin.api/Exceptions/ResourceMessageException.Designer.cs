@@ -196,6 +196,15 @@ namespace RSC {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid recurrence option..
+        /// </summary>
+        public static string RECURRENCE_OPTION {
+            get {
+                return ResourceManager.GetString("RECURRENCE_OPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid recrrence type..
         /// </summary>
         public static string RECURRENCE_TYPE_INVALID {
