@@ -49,11 +49,11 @@ namespace finefin.api.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status401Unauthorized)]
-        public async Task<IActionResult> GetAllPendingTransactionsForWallet([FromServices] IGetTransactionService service, [FromQuery] string walletId)
+        public async Task<IActionResult> GetAllPendingTransactionsForWallet([FromServices] IGetTransactionService service, string id)
         {
             var userId = HttpContext.User.FindFirst(ClaimTypes.Sid)?.Value;
 
-            return Ok(await service.GetAllPendingTransactionsForWallet(walletId, userId!));
+            return Ok(await service.GetAllPendingTransactionsForWallet(id, userId!));
         }
 
         [HttpPut("update")]
@@ -65,21 +65,23 @@ namespace finefin.api.Controllers
         public async Task<IActionResult> UpdateTransaction([FromServices] IUpdateTransactionService service, [FromBody] UpdateTransactionRequest request)
         {
             var userId = HttpContext.User.FindFirst(ClaimTypes.Sid)?.Value;
+
             await service.UpdateTransaction(userId!, request);
 
             return Ok();
         }
 
-        [HttpPut("complete")]
+        [HttpPut("complete/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status401Unauthorized)]
-        public async Task<IActionResult> CompleteTransaction([FromServices] IUpdateTransactionService service, [FromQuery] string transactionId)
+        public async Task<IActionResult> CompleteTransaction([FromServices] IUpdateTransactionService service, string id)
         {
             var userId = HttpContext.User.FindFirst(ClaimTypes.Sid)?.Value;
-            await service.CompleteTransaction(userId!, transactionId);
+
+            await service.CompleteTransaction(userId!, id);
 
             return Ok();
         }

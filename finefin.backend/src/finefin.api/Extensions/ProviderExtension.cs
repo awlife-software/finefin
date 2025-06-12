@@ -39,6 +39,7 @@ namespace finefin.api.Extensions
             services.AddTransient<ILoginValidation, LoginValidation>();
             services.AddTransient<ICreateWalletValidation, CreateWalletValidation>();
             services.AddTransient<ICreateTransactionValidation, CreateTransactionValidation>();
+            services.AddTransient<IUpdateTransactionValidation, UpdateTransactionValidation>();
         }
 
         private static void AddAutoMapper(this IServiceCollection services)

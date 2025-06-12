@@ -10,26 +10,17 @@ namespace finefin.api.Http.Filters
     {
         public void OnException(ExceptionContext context)
         {
-            if (context.Exception is BaseException)
-                HandleProjectException(context);
+            if (context.Exception is BaseException baseException)
+                HandleProjectException(context, baseException);
             else
                 HandleUnknowException(context);
             
         }
 
-        private void HandleProjectException(ExceptionContext context)
+        private void HandleProjectException(ExceptionContext context, BaseException baseException)
         {
-            if (context.Exception is ErrorOnValidationException validationException)
-            {
-                context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
-                context.Result = new BadRequestObjectResult(new ErrorResponse(validationException.ErrorMessages));
-            }
-
-            if (context.Exception is InvalidLoginException invalidLoginException)
-            {
-                context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
-                context.Result = new BadRequestObjectResult(new ErrorResponse(invalidLoginException.Message));
-            }
+            context.HttpContext.Response.StatusCode = (int)baseException.GetStatusCode();
+            context.Result = new ObjectResult(new ErrorResponse(baseException.GetErrorMessages()));
         }
 
         private void HandleUnknowException(ExceptionContext context)
