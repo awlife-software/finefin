@@ -10,5 +10,7 @@ namespace finefin.api.Data.Repositories.Interfaces
         Task<Transaction> GetTransactionWithDependencies(Guid transactionId);
         Task<List<Transaction>> GetRecurrenceTransactions(Guid recurrenceId, DateTime dueDate);
         void UpdateRange(List<Transaction> transactions);
+        Task<decimal> GetMonthTotalIncomes(Guid userId, DateTime date);
+        Task<decimal> GetMonthTotalExpenses(Guid userId, DateTime date);
     }
 }

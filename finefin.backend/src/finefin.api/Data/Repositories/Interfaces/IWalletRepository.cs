@@ -7,5 +7,6 @@ namespace finefin.api.Data.Repositories.Interfaces
     {
         Task<bool> WalletBelongsToUser(Guid walletId, Guid userId);
         Task<decimal> GetWalletBalance(Guid walletId);
+        Task<decimal> GetTotalBalanceForUser(Guid userId);
     }
 }

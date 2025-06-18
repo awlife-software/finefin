@@ -1,4 +1,7 @@
-﻿using finefin.api.Providers.Mapper;
+﻿using finefin.api.Http.Responses;
+using finefin.api.Providers.Mapper;
+using finefin.api.Providers.Services.DashboardServices;
+using finefin.api.Providers.Services.DashboardServices.Interfaces;
 using finefin.api.Providers.Services.TransactionServices.Create;
 using finefin.api.Providers.Services.TransactionServices.Get;
 using finefin.api.Providers.Services.TransactionServices.Update;
@@ -31,6 +34,7 @@ namespace finefin.api.Extensions
             services.AddScoped<ICreateTransactionService, CreateTransactionService>();
             services.AddScoped<IGetTransactionService, GetTransactionService>();
             services.AddScoped<IUpdateTransactionService, UpdateTransactionService>();
+            services.AddScoped<ISummaryService, SummaryService>();
         }
 
         private static void AddExtraProviders(this IServiceCollection services)

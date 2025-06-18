@@ -1,5 +1,6 @@
 ﻿using finefin.api.Data.Repositories.Interfaces;
 using finefin.api.Models.Entities;
+using finefin.api.Models.Enums;
 using Microsoft.EntityFrameworkCore;
 using valet.lib.Auth.Domain.Entities;
 using valet.lib.Core.Data.Repositories;
@@ -25,6 +26,16 @@ namespace finefin.api.Data.Repositories
             .Include(x => x.Wallet)
             .Include(x => x.Recurrence)
             .FirstAsync(x => x.Id == transactionId);
+
+        public async Task<decimal> GetMonthTotalIncomes(Guid userId, DateTime date) => await dbSet
+            .Include(x => x.Wallet)
+            .Where(x => x.Wallet!.UserId.Equals(userId) && (x.DueDate.Month.Equals(date.Month) && x.DueDate.Year.Equals(date.Year)) && x.Type == TransactionType.INCOME.ToString() && x.IsCompleted)
+            .SumAsync(x => x.Amount);
+
+        public async Task<decimal> GetMonthTotalExpenses(Guid userId, DateTime date) => await dbSet
+            .Include(x => x.Wallet)
+            .Where(x => x.Wallet!.UserId.Equals(userId) && (x.DueDate.Month.Equals(date.Month) && x.DueDate.Year.Equals(date.Year)) && x.Type == TransactionType.EXPENSE.ToString() && x.IsCompleted)
+            .SumAsync(x => x.Amount);
 
         // UPDATE RANGE
         public void UpdateRange(List<Transaction> transactions)
