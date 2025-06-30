@@ -30,6 +30,7 @@ namespace finefin.api.Controllers
             return Created(string.Empty, null);
         }
 
+        [ValidateUser]
         [HttpGet("pending/user")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
@@ -43,6 +44,7 @@ namespace finefin.api.Controllers
             return Ok(await service.GetAllPendingTransactionsForUser(userId!));
         }
 
+        [ValidateUser]
         [HttpGet("pending/wallet/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
@@ -56,6 +58,7 @@ namespace finefin.api.Controllers
             return Ok(await service.GetAllPendingTransactionsForWallet(id, userId!));
         }
 
+        [ValidateUser]
         [HttpPut("update")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
@@ -71,6 +74,7 @@ namespace finefin.api.Controllers
             return Ok();
         }
 
+        [ValidateUser]
         [HttpPut("complete/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]

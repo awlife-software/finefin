@@ -12,17 +12,31 @@ namespace finefin.api.Controllers
     public class DashboardController : ControllerBase
     {
         [ValidateUser]
-        [HttpGet("summary")]
+        [HttpGet("CurrentMonthSummary")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status401Unauthorized)]
-        public async Task<IActionResult> GetMonthSummary([FromServices] ISummaryService service)
+        public async Task<IActionResult> GetCurrentMonthSummary([FromServices] ISummaryService service)
         {
             var userId = HttpContext.User.FindFirst(ClaimTypes.Sid)?.Value;
 
-            return Ok(await service.GetSummary(userId!));
+            return Ok(await service.GetSummary(userId!, DateTime.UtcNow));
+        }
+
+        [ValidateUser]
+        [HttpGet("SpecificMonthSummary")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status401Unauthorized)]
+        public async Task<IActionResult> GetSpecificMonthSummary([FromServices] ISummaryService service, [FromQuery] DateTime date)
+        {
+            var userId = HttpContext.User.FindFirst(ClaimTypes.Sid)?.Value;
+
+            return Ok(await service.GetSummary(userId!, date));
         }
     }
 }

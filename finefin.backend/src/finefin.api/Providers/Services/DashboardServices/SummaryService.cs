@@ -15,10 +15,10 @@ namespace finefin.api.Providers.Services.DashboardServices
             _walletRepository = walletRepository;
         }
 
-        public async Task<SummaryResponse> GetSummary(string userId)
+        public async Task<SummaryResponse> GetSummary(string userId, DateTime date)
         {
-            var currentMonthIncomes = await _transactionRepository.GetMonthTotalIncomes(Guid.Parse(userId), DateTime.UtcNow);
-            var currentMonthExpenses = await _transactionRepository.GetMonthTotalExpenses(Guid.Parse(userId), DateTime.UtcNow);
+            var currentMonthIncomes = await _transactionRepository.GetMonthTotalIncomes(Guid.Parse(userId), date);
+            var currentMonthExpenses = await _transactionRepository.GetMonthTotalExpenses(Guid.Parse(userId), date);
 
             return new SummaryResponse
             {
