@@ -1,4 +1,5 @@
-﻿using finefin.api.Http.Requests;
+﻿using finefin.api.Data.Repositories.Interfaces;
+using finefin.api.Http.Requests;
 using finefin.api.Models.Enums;
 using finefin.api.Providers.Validation.Transaction.Interfaces;
 using FluentValidation;
@@ -15,12 +16,27 @@ namespace finefin.api.Providers.Validation.Transaction
             RuleFor(x => x.Amount)
                 .GreaterThan(decimal.Zero)
                 .WithMessage(RSC.ResourceMessageException.TRANSACTION_AMOUNT_INVALID);
-            RuleFor(x => x.Recurrence!.Type)
+            RuleFor(x => x.Recurrence.Type)
                 .Must(BeAValidRecurrenceType)
                 .WithMessage(RSC.ResourceMessageException.RECURRENCE_TYPE_INVALID);
-            RuleFor(x => x.Recurrence!.Occurrences)
+            RuleFor(x => x.Recurrence.Occurrences)
                 .LessThanOrEqualTo(100)
                 .WithMessage(RSC.ResourceMessageException.RECURRENCE_OCCURRENCIES_MAX);
+            RuleFor(x => x.Description)
+                .MaximumLength(50)
+                .WithMessage(RSC.ResourceMessageException.DESCRIPTION_MAX_LENGTH);
+            RuleFor(x => x.Description)
+                .MinimumLength(4)
+                .WithMessage(RSC.ResourceMessageException.DESCRIPTION_MIN_LENGTH);
+
+            When(x => x.Recurrence.Type == RecurrenceType.SINGLE.ToString(), () =>
+            {
+                RuleFor(x => x.Recurrence.Occurrences).Must(x => x.Equals(1)).WithMessage(RSC.ResourceMessageException.SINGLE_RECURRENCE_INVALID);
+            });
+            When(x => x.Recurrence.Type != RecurrenceType.SINGLE.ToString(), () =>
+            {
+                RuleFor(x => x.Recurrence.Occurrences).GreaterThan(1).WithMessage(RSC.ResourceMessageException.MULTIPLE_RECURRENCE_INVALID);
+            });
         }
 
 

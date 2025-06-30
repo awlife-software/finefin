@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using finefin.api.Data;
 
@@ -11,9 +12,11 @@ using finefin.api.Data;
 namespace finefin.api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250517022716_AddDescriptionToTransaction")]
+    partial class AddDescriptionToTransaction
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,7 +89,7 @@ namespace finefin.api.Migrations
                         .HasColumnType("bit")
                         .HasColumnName("TRN_COMPLETED");
 
-                    b.Property<Guid>("RecurrenceId")
+                    b.Property<Guid?>("RecurrenceId")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("TRN_RECURRENCE_ID");
 

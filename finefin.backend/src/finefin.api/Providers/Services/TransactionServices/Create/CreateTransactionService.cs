@@ -37,23 +37,31 @@ namespace finefin.api.Providers.Services.TransactionServices.Create
             if (!userIsValid)
                 throw new WalletDontBelongToUserException();
 
+            if (request.Type == TransactionType.EXPENSE.ToString())
+                await ValidateExpense(request);
+
             var transaction = _mapper.Map<Transaction>(request);
+
+            if (transaction.IsCompleted)
+                transaction.CompletionDate = DateTime.UtcNow;
+
+            var wallet = await _walletRepository.GetAsync(x => x.Id == request.WalletId);
 
             var recurrence = await _recurrenceRepository.CreateAndGetAsync(_mapper.Map<Recurrence>(transaction.Recurrence));
 
             transaction.RecurrenceId = recurrence.Id;
 
-            for(var i = 1; i <= transaction.Recurrence!.Occurrences; i++)
+            for(var i = 0; i < transaction.Recurrence!.Occurrences; i++)
             {
-                if(i > 1)
+                if(i >= 1) // TODO: FIX INDEX
                 {
                     transaction.IsCompleted = false;
-                    await HandleRecurrence(transaction, i);
-
+                    await HandleRecurrence(transaction, i, request.DueDate);
                 }
                 else
                 {
                     await _transactionRepository.CreateAsync(transaction);
+                    HandleBalance(wallet, transaction);
                     await _unitOfWork.Commit();
                 }
             }
@@ -70,26 +78,49 @@ namespace finefin.api.Providers.Services.TransactionServices.Create
             }
         }
 
-        private async Task HandleRecurrence(Transaction transaction, int index)
+        private async Task HandleRecurrence(Transaction transaction, int index, DateTime requestDueDate)
         {
-            var value = index - 1;
 
             if (transaction.Recurrence!.Type == RecurrenceType.DAYLI.ToString())
-                transaction.DueDate = transaction.DueDate.AddDays(value);
+                transaction.DueDate = requestDueDate.AddDays(index);
 
             if (transaction.Recurrence!.Type == RecurrenceType.WEEKLY.ToString())
-                transaction.DueDate = transaction.DueDate.AddDays(value * 7);
+                transaction.DueDate = requestDueDate.AddDays(index * 7);
 
             if (transaction.Recurrence!.Type == RecurrenceType.MONTHLY.ToString())
-                transaction.DueDate = transaction.DueDate.AddMonths(value);
+                transaction.DueDate = requestDueDate.AddMonths(index);
 
             if (transaction.Recurrence!.Type == RecurrenceType.YEARLY.ToString())
-                transaction.DueDate = transaction.DueDate.AddYears(value);
+                transaction.DueDate = requestDueDate.AddYears(index);
 
 
             transaction.Id = Guid.NewGuid();
             await _transactionRepository.CreateAsync(transaction);
             await _unitOfWork.Commit();
+        }
+
+        private void HandleBalance(Wallet wallet, Transaction transaction)
+        {
+            if (transaction.IsCompleted)
+            {
+                if (transaction.Type == TransactionType.INCOME.ToString())
+                    wallet.Balance += transaction.Amount;
+                else
+                    wallet.Balance -= transaction.Amount;
+
+                _walletRepository.Update(wallet);
+            }
+        }
+
+        private async Task ValidateExpense(CreateTransactionRequest request)
+        {
+            if (request.IsCompleted)
+            {
+                var balance = await _walletRepository.GetWalletBalance(request.WalletId);
+
+                if (request.Amount > balance)
+                    throw new InsufficientFundsException();
+            }
         }
     }
 }

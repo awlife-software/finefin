@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DESCRIPTION_MAX_LENGTH" xml:space="preserve">
+    <value>O tamanho máximo da descrição é de 50 caracteres.</value>
+  </data>
+  <data name="DESCRIPTION_MIN_LENGTH" xml:space="preserve">
+    <value>A descrição deve ter pelo menos 4 caracteres.</value>
+  </data>
   <data name="EMAIL_EMPTY" xml:space="preserve">
     <value>Email não pode estar vazio.</value>
   </data>
@@ -132,6 +138,12 @@
   <data name="FIRSTNAME_LENGTH" xml:space="preserve">
     <value>O nome deve ter de 2 a 30 caracteres.</value>
   </data>
+  <data name="INSUFFICIENT_FUNDS" xml:space="preserve">
+    <value>Não é possível completar a operação devido ao saldo insificiente.</value>
+  </data>
+  <data name="INVALID_ID" xml:space="preserve">
+    <value>Id inválido.</value>
+  </data>
   <data name="LASTNAME_EMPTY" xml:space="preserve">
     <value>Sobrenome não pode estar vazio.</value>
   </data>
@@ -141,14 +153,26 @@
   <data name="LOGIN_INVALID" xml:space="preserve">
     <value>Email ou senha não correspondem.</value>
   </data>
+  <data name="MULTIPLE_RECURRENCE_INVALID" xml:space="preserve">
+    <value>Transações de tipo multiplo definidas em recorrência devem ter pelo menos 2 ocorrências.</value>
+  </data>
   <data name="PASSWORD_INVALID" xml:space="preserve">
     <value>A senha deve ter pelo menos 6 caracteres e incluir pelo menos um maiúsculo, um minúsculo e um especial.</value>
   </data>
   <data name="RECURRENCE_OCCURRENCIES_MAX" xml:space="preserve">
     <value>Não podemos registrar mais de 100 ocorrências para uma transação.</value>
   </data>
+  <data name="RECURRENCE_OPTION" xml:space="preserve">
+    <value>Opção de recorrência inválida.</value>
+  </data>
   <data name="RECURRENCE_TYPE_INVALID" xml:space="preserve">
     <value>Tipo de recorrência inválido.</value>
+  </data>
+  <data name="SINGLE_RECURRENCE_INVALID" xml:space="preserve">
+    <value>Transações de tipo único definidas em recorrência devem ter apenas 1 ocorrência.</value>
+  </data>
+  <data name="TRANSACTION_ALREADY_COMPLETED" xml:space="preserve">
+    <value>Essa transação já está completa.</value>
   </data>
   <data name="TRANSACTION_AMOUNT_INVALID" xml:space="preserve">
     <value>A quantidade deve ser maior do que zero.</value>
