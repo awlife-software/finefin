@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "finefin.WebAPI", "src\finef
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "finefin.Tests", "src\finefin.Tests\finefin.Tests.csproj", "{EE2C352D-C7EE-4BDE-B3DE-1B1B87CB6FDE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "finefin.Shared", "src\finefin.Shared\finefin.Shared.csproj", "{B1C3D4CA-4684-4B81-A2B1-9150075AAE42}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{EE2C352D-C7EE-4BDE-B3DE-1B1B87CB6FDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE2C352D-C7EE-4BDE-B3DE-1B1B87CB6FDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE2C352D-C7EE-4BDE-B3DE-1B1B87CB6FDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1C3D4CA-4684-4B81-A2B1-9150075AAE42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1C3D4CA-4684-4B81-A2B1-9150075AAE42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1C3D4CA-4684-4B81-A2B1-9150075AAE42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1C3D4CA-4684-4B81-A2B1-9150075AAE42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +73,7 @@ Global
 		{4A1CEBAE-C43F-4570-B805-13D2EB2845AA} = {154D37CF-ADD4-4F02-9DE5-7DC036CC17EB}
 		{0B53D1F7-EBD6-4D9E-AC72-EF819810FD00} = {154D37CF-ADD4-4F02-9DE5-7DC036CC17EB}
 		{EE2C352D-C7EE-4BDE-B3DE-1B1B87CB6FDE} = {154D37CF-ADD4-4F02-9DE5-7DC036CC17EB}
+		{B1C3D4CA-4684-4B81-A2B1-9150075AAE42} = {154D37CF-ADD4-4F02-9DE5-7DC036CC17EB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EC0BD5C2-0BB4-419C-90FB-DE4A98D9C1AD}
