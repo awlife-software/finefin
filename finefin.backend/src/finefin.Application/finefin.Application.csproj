@@ -7,7 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Providers\Validation\User\Interfaces\z214auyi.hmu~" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
+    <PackageReference Include="FluentValidation" Version="12.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\finefin.Domain\finefin.Domain.csproj" />
+    <ProjectReference Include="..\finefin.Shared\finefin.Shared.csproj" />
   </ItemGroup>
 
 </Project>

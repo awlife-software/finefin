@@ -1,0 +1,16 @@
+﻿using finefin.Domain.Entities;
+using valet.lib.Core.Domain.Interfaces;
+
+namespace finefin.Domain.Interfaces.Repositories
+{
+    public interface ITransactionRepository : IRepository<Transaction>
+    {
+        Task<List<Transaction>> GetAllPendingTransactionsForUserAsync(Guid userId);
+        Task<List<Transaction>> GetAllPendingTransactionsForWalletAsync(Guid walletId);
+        Task<Transaction> GetTransactionWithDependencies(Guid transactionId);
+        Task<List<Transaction>> GetRecurrenceTransactions(Guid recurrenceId, DateTime dueDate);
+        void UpdateRange(List<Transaction> transactions);
+        Task<decimal> GetMonthTotalIncomes(Guid userId, DateTime date);
+        Task<decimal> GetMonthTotalExpenses(Guid userId, DateTime date);
+    }
+}

@@ -1,6 +1,0 @@
-@finefin.api_HostAddress = http://localhost:5289
-
-GET {{finefin.api_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
