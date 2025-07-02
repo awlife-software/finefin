@@ -28,12 +28,12 @@ namespace finefin.Infrastructure.Data.Repositories
 
         public async Task<decimal> GetMonthTotalIncomes(Guid userId, DateTime date) => await dbSet
             .Include(x => x.Wallet)
-            .Where(x => x.Wallet!.UserId.Equals(userId) && x.DueDate.Month.Equals(date.Month) && x.DueDate.Year.Equals(date.Year) && x.Type == TransactionType.INCOME.ToString() && x.IsCompleted)
+            .Where(x => x.Wallet!.UserId.Equals(userId) && x.DueDate.Month.Equals(date.Month) && x.DueDate.Year.Equals(date.Year) && x.Type == TransactionType.INCOME && x.IsCompleted)
             .SumAsync(x => x.Amount);
 
         public async Task<decimal> GetMonthTotalExpenses(Guid userId, DateTime date) => await dbSet
             .Include(x => x.Wallet)
-            .Where(x => x.Wallet!.UserId.Equals(userId) && x.DueDate.Month.Equals(date.Month) && x.DueDate.Year.Equals(date.Year) && x.Type == TransactionType.EXPENSE.ToString() && x.IsCompleted)
+            .Where(x => x.Wallet!.UserId.Equals(userId) && x.DueDate.Month.Equals(date.Month) && x.DueDate.Year.Equals(date.Year) && x.Type == TransactionType.EXPENSE && x.IsCompleted)
             .SumAsync(x => x.Amount);
 
         // UPDATE RANGE

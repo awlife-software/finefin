@@ -7,9 +7,7 @@ namespace finefin.Domain.Entities
     public class Transaction : BaseEntity
     {
         public string Description { get; set; } = string.Empty;
-
-        [EnumDataType(typeof(TransactionType))]
-        public string Type { get; set; } = string.Empty;
+        public TransactionType Type { get; set; }
         public decimal Amount { get; set; } = decimal.Zero;
         public DateTime DueDate { get; set; } = DateTime.UtcNow.Date;
         public bool IsCompleted { get; set; }

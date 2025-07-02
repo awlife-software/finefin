@@ -27,7 +27,7 @@ namespace finefin.Application.Providers.Mapper
         {
             CreateMap<Transaction, PendingTransactionResponse>()
                 .ForMember(dest => dest.RecurrenceType,
-                            opt => opt.MapFrom(src => src.Recurrence != null ? src.Recurrence.Type : string.Empty))
+                            opt => opt.MapFrom(src => src.Recurrence.Type))
                 .ForMember(dest => dest.Occurrences,
                             opt => opt.MapFrom(src => src.Recurrence != null ? src.Recurrence.Occurrences : 1)).ReverseMap();
         }

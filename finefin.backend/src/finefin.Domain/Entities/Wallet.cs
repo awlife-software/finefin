@@ -6,12 +6,9 @@ namespace finefin.Domain.Entities
 {
     public class Wallet : BaseEntity
     {
-        [EnumDataType(typeof(WalletType))]
-        public string Type { get; set; } = string.Empty;
+        public WalletType Type { get; set; }
         public string Name { get; set; } = string.Empty;
-
-        [EnumDataType(typeof(WalletColor))]
-        public string Color { get; set; } = string.Empty;
+        public WalletColor Color { get; set; }
         public decimal Balance { get; set; } = decimal.Zero;
         public DateTime LastEditDate { get; set; } = DateTime.UtcNow;
         public virtual ICollection<Transaction> Transactions { get; set; } = [];

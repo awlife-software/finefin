@@ -15,7 +15,7 @@ namespace finefin.Application.Providers.Services.TransactionServices.Update
                 entity.IsCompleted = false;
                 entity.CompletionDate = DateTime.MinValue;
 
-                if (entity.Type == TransactionType.INCOME.ToString())
+                if (entity.Type == TransactionType.INCOME)
                     entity.Wallet!.Balance -= entity.Amount;// SUBTRAI O VALOR PERSISTIDO // TODO: TESTAR SE A MANIPULAÇÃO DE SALDO DIRETA VAI ROLAR
                 else 
                     entity.Wallet!.Balance += entity.Amount;
@@ -29,7 +29,7 @@ namespace finefin.Application.Providers.Services.TransactionServices.Update
                 entity.CompletionDate = DateTime.UtcNow;
                 // HANDLE AMOUNT HERE
                 entity.Amount = request.Amount; // 20 -> 30
-                if (entity.Type == TransactionType.INCOME.ToString())
+                if (entity.Type == TransactionType.INCOME)
                     entity.Wallet!.Balance += entity.Amount; // +30
                 else
                     entity.Wallet!.Balance -= entity.Amount;
@@ -42,14 +42,14 @@ namespace finefin.Application.Providers.Services.TransactionServices.Update
                 {
                     if (entity.IsCompleted)
                     {
-                        if (entity.Type == TransactionType.INCOME.ToString())
+                        if (entity.Type == TransactionType.INCOME)
                             entity.Wallet!.Balance -= entity.Amount;
                         else
                             entity.Wallet!.Balance += entity.Amount;
 
                         entity.Amount = request.Amount;
 
-                        if (entity.Type == TransactionType.INCOME.ToString())
+                        if (entity.Type == TransactionType.INCOME)
                             entity.Wallet!.Balance += entity.Amount;
                         else
                             entity.Wallet!.Balance -= entity.Amount;
@@ -97,7 +97,7 @@ namespace finefin.Application.Providers.Services.TransactionServices.Update
 
         public static void HandleBalanceOnCompletion(this Transaction transaction)
         {
-            if (transaction.Type == TransactionType.INCOME.ToString())
+            if (transaction.Type == TransactionType.INCOME)
                 transaction.Wallet!.Balance += transaction.Amount;
             else
                 transaction.Wallet!.Balance -= transaction.Amount;
