@@ -6,9 +6,8 @@ namespace finefin.Domain.Entities
 {
     public class Recurrence : BaseEntity
     {
-        [EnumDataType(typeof(RecurrenceType))]
-        public string Type { get; set; } = string.Empty;
-        public int Occurrences { get; set; } = 1;// "Installments" vai ser usado para parcelas de crédito pois é mais adequado
+        public RecurrenceType Type { get; set; }
+        public int Occurrences { get; set; } = 1;
         public virtual ICollection<Transaction> Transactions { get; set; } = [];
     }
 }

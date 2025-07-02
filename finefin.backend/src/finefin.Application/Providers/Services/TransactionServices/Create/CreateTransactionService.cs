@@ -81,16 +81,16 @@ namespace finefin.Application.Providers.Services.TransactionServices.Create
         private async Task HandleRecurrence(Transaction transaction, int index, DateTime requestDueDate)
         {
 
-            if (transaction.Recurrence!.Type == RecurrenceType.DAYLI.ToString())
+            if (transaction.Recurrence!.Type == RecurrenceType.DAYLI)
                 transaction.DueDate = requestDueDate.AddDays(index);
 
-            if (transaction.Recurrence!.Type == RecurrenceType.WEEKLY.ToString())
+            if (transaction.Recurrence!.Type == RecurrenceType.WEEKLY)
                 transaction.DueDate = requestDueDate.AddDays(index * 7);
 
-            if (transaction.Recurrence!.Type == RecurrenceType.MONTHLY.ToString())
+            if (transaction.Recurrence!.Type == RecurrenceType.MONTHLY)
                 transaction.DueDate = requestDueDate.AddMonths(index);
 
-            if (transaction.Recurrence!.Type == RecurrenceType.YEARLY.ToString())
+            if (transaction.Recurrence!.Type == RecurrenceType.YEARLY)
                 transaction.DueDate = requestDueDate.AddYears(index);
 
 
@@ -103,7 +103,7 @@ namespace finefin.Application.Providers.Services.TransactionServices.Create
         {
             if (transaction.IsCompleted)
             {
-                if (transaction.Type == TransactionType.INCOME.ToString())
+                if (transaction.Type == TransactionType.INCOME)
                     wallet.Balance += transaction.Amount;
                 else
                     wallet.Balance -= transaction.Amount;

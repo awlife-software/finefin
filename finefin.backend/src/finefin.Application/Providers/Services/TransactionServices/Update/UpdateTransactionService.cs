@@ -36,7 +36,7 @@ namespace finefin.Application.Providers.Services.TransactionServices.Update
             if (!await _walletRepository.WalletBelongsToUser(transaction.WalletId, Guid.Parse(userId)))
                 throw new WalletDontBelongToUserException();
 
-            if (transaction.Type == TransactionType.EXPENSE.ToString())
+            if (transaction.Type == TransactionType.EXPENSE)
                 await ValidateExpenseOnCompletion(transaction, transaction.WalletId);
 
             transaction.HandleBalanceOnCompletion();
@@ -58,7 +58,7 @@ namespace finefin.Application.Providers.Services.TransactionServices.Update
             if (!await _walletRepository.WalletBelongsToUser(entity.WalletId, Guid.Parse(userId)))
                 throw new WalletDontBelongToUserException();
 
-            if (entity.Type == TransactionType.EXPENSE.ToString())
+            if (entity.Type == TransactionType.EXPENSE)
                 await ValidateExpense(request, entity.WalletId);
 
             entity.HandleCompetionAndBalance(request);
