@@ -30,6 +30,10 @@ namespace finefin.Domain.Entities
         public virtual Wallet? Wallet { get; private set; }
         public Guid WalletId { get; private set; }
 
+        public void HandleRecurrence(Recurrence recurrence)
+        {
+
+        }
         private void SetDescription(string description)
         {
             if (string.IsNullOrWhiteSpace(description))

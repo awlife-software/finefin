@@ -17,6 +17,8 @@ namespace finefin.Domain.Entities
         public int Occurrences { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }
 
+
+
         private void SetOcurrences(int occurrences)
         {
             if (occurrences <= 0)

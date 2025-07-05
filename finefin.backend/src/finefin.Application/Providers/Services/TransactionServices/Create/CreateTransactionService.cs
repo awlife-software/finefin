@@ -3,6 +3,7 @@ using finefin.Application.Providers.Validation.Transaction.Interfaces;
 using finefin.Domain.Entities;
 using finefin.Domain.Entities.Enums;
 using finefin.Domain.Interfaces.Repositories;
+using finefin.Domain.Services;
 using finefin.Shared.Communication.Requests;
 using finefin.Shared.Exceptions;
 using valet.lib.Core.Domain.Interfaces;
@@ -40,31 +41,17 @@ namespace finefin.Application.Providers.Services.TransactionServices.Create
             if (request.Type == TransactionType.EXPENSE.ToString())
                 await ValidateExpense(request);
 
-            var transaction = _mapper.Map<Transaction>(request);
-
-            if (transaction.IsCompleted)
-                transaction.CompletionDate = DateTime.UtcNow;
+            var transaction = _mapper.Map<Transaction>(request); // TODO: verify possibilitty to use either factory or mapping builder pattern
 
             var wallet = await _walletRepository.GetAsync(x => x.Id == request.WalletId);
 
-            var recurrence = await _recurrenceRepository.CreateAndGetAsync(_mapper.Map<Recurrence>(transaction.Recurrence));
+            var recurrence = _mapper.Map<Recurrence>(transaction.Recurrence);
 
-            transaction.RecurrenceId = recurrence.Id;
+            RecurrenceTransactionService.GenerateTransactionsForRecurrence(recurrence, transaction, wallet);
 
-            for(var i = 0; i < transaction.Recurrence!.Occurrences; i++)
-            {
-                if(i >= 1) // TODO: FIX INDEX
-                {
-                    transaction.IsCompleted = false;
-                    await HandleRecurrence(transaction, i, request.DueDate);
-                }
-                else
-                {
-                    await _transactionRepository.CreateAsync(transaction);
-                    HandleBalance(wallet, transaction);
-                    await _unitOfWork.Commit();
-                }
-            }
+            await _recurrenceRepository.CreateAsync(recurrence);
+
+            await _unitOfWork.Commit();
         }
 
         private async Task Validate(CreateTransactionRequest request)
@@ -75,40 +62,6 @@ namespace finefin.Application.Providers.Services.TransactionServices.Create
             {
                 var errors = result.Errors.Select(x => x.ErrorMessage).ToList();
                 throw new ErrorOnValidationException(errors);
-            }
-        }
-
-        private async Task HandleRecurrence(Transaction transaction, int index, DateTime requestDueDate)
-        {
-
-            if (transaction.Recurrence!.Type == RecurrenceType.DAYLI)
-                transaction.DueDate = requestDueDate.AddDays(index);
-
-            if (transaction.Recurrence!.Type == RecurrenceType.WEEKLY)
-                transaction.DueDate = requestDueDate.AddDays(index * 7);
-
-            if (transaction.Recurrence!.Type == RecurrenceType.MONTHLY)
-                transaction.DueDate = requestDueDate.AddMonths(index);
-
-            if (transaction.Recurrence!.Type == RecurrenceType.YEARLY)
-                transaction.DueDate = requestDueDate.AddYears(index);
-
-
-            transaction.Id = Guid.NewGuid();
-            await _transactionRepository.CreateAsync(transaction);
-            await _unitOfWork.Commit();
-        }
-
-        private void HandleBalance(Wallet wallet, Transaction transaction)
-        {
-            if (transaction.IsCompleted)
-            {
-                if (transaction.Type == TransactionType.INCOME)
-                    wallet.Balance += transaction.Amount;
-                else
-                    wallet.Balance -= transaction.Amount;
-
-                _walletRepository.Update(wallet);
             }
         }
 

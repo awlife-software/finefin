@@ -51,6 +51,22 @@ namespace finefin.Domain.Entities
             this.Balance = balance;
         }
 
+        public void RegisterIncome(decimal amount)
+        {
+            if (amount <= 0)
+                throw new ArgumentException("Income amount must be greater than zero.", nameof(amount));
+            this.Balance += amount;
+            Touch();
+        }
+
+        public void RegisterExpense(decimal amount)
+        {
+            if (amount <= 0)
+                throw new ArgumentException("Expense amount must be greater than zero.", nameof(amount));
+            this.Balance -= amount;
+            Touch();
+        }
+
         private void Touch()
         {
             this.UpdatedAt = DateTime.UtcNow;
