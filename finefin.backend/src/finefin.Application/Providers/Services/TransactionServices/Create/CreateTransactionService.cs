@@ -50,6 +50,7 @@ namespace finefin.Application.Providers.Services.TransactionServices.Create
             RecurrenceTransactionService.GenerateTransactionsForRecurrence(recurrence, transaction, wallet);
 
             await _recurrenceRepository.CreateAsync(recurrence);
+            _walletRepository.Update(wallet);
 
             await _unitOfWork.Commit();
         }
