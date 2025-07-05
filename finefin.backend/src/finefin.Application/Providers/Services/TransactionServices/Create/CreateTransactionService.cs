@@ -43,7 +43,7 @@ namespace finefin.Application.Providers.Services.TransactionServices.Create
 
             var transaction = _mapper.Map<Transaction>(request); // TODO: verify possibilitty to use either factory or mapping builder pattern
 
-            var wallet = await _walletRepository.GetAsync(x => x.Id == request.WalletId);
+            var wallet = await _walletRepository.GetAsync(x => x.Id == request.WalletId); // TODO: Verift if waller balance is updated on recurrence creation
 
             var recurrence = _mapper.Map<Recurrence>(transaction.Recurrence);
 
