@@ -31,7 +31,7 @@ namespace finefin.Application.Providers.Services.WalletServices.Create
 
             var wallet = _mapper.Map<Wallet>(request);
 
-            wallet.UserId = Guid.Parse(userId);
+            //wallet = Guid.Parse(userId);
 
             await _walletRepository.CreateAsync(wallet);
             await _unitOfWork.Commit();

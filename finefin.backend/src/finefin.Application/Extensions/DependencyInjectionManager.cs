@@ -34,7 +34,7 @@ namespace finefin.Application.Extensions
             services.AddScoped<ICreateWalletService, CreateWalletService>();
             services.AddScoped<ICreateTransactionService, CreateTransactionService>();
             services.AddScoped<IGetTransactionService, GetTransactionService>();
-            services.AddScoped<IUpdateTransactionService, UpdateTransactionService>();
+            //services.AddScoped<IUpdateTransactionService, UpdateTransactionService>();
             services.AddScoped<ISummaryService, SummaryService>();
         }
 

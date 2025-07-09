@@ -7,7 +7,7 @@ namespace finefin.Domain.Entities
     public class Transaction : BaseEntity
     {
 
-        public Transaction(string description, TransactionType type, decimal amount, DateTime dueDate, bool isCompleted, DateTime completionDate, Guid recurrenceId, Guid walletId)
+        public Transaction(string description, TransactionType type, decimal amount, DateTime dueDate, bool isCompleted, DateTime completionDate, Guid walletId)
         {
             SetDescription(description);
             SetAmount(amount);
@@ -15,19 +15,10 @@ namespace finefin.Domain.Entities
             this.DueDate = dueDate;
             this.IsCompleted = isCompleted;
             HandleCompletionDate();
-            this.RecurrenceId = recurrenceId;
             this.WalletId = walletId;
         }
 
-        public Transaction(string description, TransactionType type, decimal amount, DateTime dueDate, bool isCompleted, DateTime completionDate)
-        {
-            SetDescription(description);
-            SetAmount(amount);
-            this.Type = type;
-            this.DueDate = dueDate;
-            this.IsCompleted = isCompleted;
-            HandleCompletionDate();
-        }
+      
 
         public string Description { get; private set; } = string.Empty;
         public TransactionType Type { get; private set; }

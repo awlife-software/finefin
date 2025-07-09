@@ -20,7 +20,6 @@ namespace finefin.Domain.Services
                     CalculateDueDate(recurrence.Type, template.DueDate, i),
                     i == 0 ? template.IsCompleted : false,
                     template.CompletionDate,
-                    recurrence.Id,
                     wallet.Id
                 );
                 recurrence.Transactions.Add(transaction);

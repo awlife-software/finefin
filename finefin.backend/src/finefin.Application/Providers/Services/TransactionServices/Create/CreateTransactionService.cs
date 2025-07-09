@@ -32,7 +32,7 @@ namespace finefin.Application.Providers.Services.TransactionServices.Create
 
         public async Task CreateTransaction(string userId, CreateTransactionRequest request)
         {
-            await Validate(request);
+            await Validate(request);// TODO: VALIDATE NEGATIVA AMOUNT ON REQUEST
 
             var userIsValid = await _walletRepository.WalletBelongsToUser(request.WalletId, Guid.Parse(userId));
 
@@ -42,9 +42,9 @@ namespace finefin.Application.Providers.Services.TransactionServices.Create
             if (request.Type == TransactionType.EXPENSE.ToString())
                 await ValidateExpense(request);
 
-            var transaction = TransactionFactory.CreateFromRequest(request); 
-
             var wallet = await _walletRepository.GetAsync(x => x.Id == request.WalletId);
+
+            var transaction = TransactionFactory.CreateFromRequest(request); 
 
             var recurrence = new Recurrence(
                 Enum.Parse<RecurrenceType>(request.Recurrence.Type, true),

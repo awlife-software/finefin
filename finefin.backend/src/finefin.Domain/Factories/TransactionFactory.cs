@@ -14,8 +14,10 @@ namespace finefin.Domain.Factories
                 request.Amount,
                 request.DueDate,
                 request.IsCompleted,
-                request.IsCompleted ? DateTime.UtcNow : DateTime.MinValue
+                request.IsCompleted ? DateTime.UtcNow : DateTime.MinValue,
+                request.WalletId
                 );
         }
+
     }
 }
