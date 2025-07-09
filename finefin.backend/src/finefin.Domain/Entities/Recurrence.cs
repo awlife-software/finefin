@@ -6,7 +6,7 @@ namespace finefin.Domain.Entities
 {
     public class Recurrence : BaseEntity
     {
-        public Recurrence() { }
+        protected Recurrence() { }
         public Recurrence(RecurrenceType type, int ocurrences)
         {
             this.Type = type;
@@ -14,8 +14,8 @@ namespace finefin.Domain.Entities
             this.Transactions = [];
         }
         public RecurrenceType Type { get; private set; }
-        public int Occurrences { get; set; }
-        public virtual ICollection<Transaction> Transactions { get; set; }
+        public int Occurrences { get; private set; }
+        public virtual ICollection<Transaction> Transactions { get; private set; }
 
 
 

@@ -2,6 +2,7 @@
 using finefin.Application.Providers.Validation.Transaction.Interfaces;
 using finefin.Domain.Entities;
 using finefin.Domain.Entities.Enums;
+using finefin.Domain.Factories;
 using finefin.Domain.Interfaces.Repositories;
 using finefin.Domain.Services;
 using finefin.Shared.Communication.Requests;
@@ -41,11 +42,14 @@ namespace finefin.Application.Providers.Services.TransactionServices.Create
             if (request.Type == TransactionType.EXPENSE.ToString())
                 await ValidateExpense(request);
 
-            var transaction = _mapper.Map<Transaction>(request); // TODO: verify possibilitty to use either factory or mapping builder pattern
+            var transaction = TransactionFactory.CreateFromRequest(request); 
 
-            var wallet = await _walletRepository.GetAsync(x => x.Id == request.WalletId); // TODO: Verift if waller balance is updated on recurrence creation
+            var wallet = await _walletRepository.GetAsync(x => x.Id == request.WalletId);
 
-            var recurrence = _mapper.Map<Recurrence>(transaction.Recurrence);
+            var recurrence = new Recurrence(
+                Enum.Parse<RecurrenceType>(request.Recurrence.Type, true),
+                request.Recurrence.Occurrences
+                );
 
             RecurrenceTransactionService.GenerateTransactionsForRecurrence(recurrence, transaction, wallet);
 

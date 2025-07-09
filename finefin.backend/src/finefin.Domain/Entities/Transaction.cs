@@ -19,6 +19,16 @@ namespace finefin.Domain.Entities
             this.WalletId = walletId;
         }
 
+        public Transaction(string description, TransactionType type, decimal amount, DateTime dueDate, bool isCompleted, DateTime completionDate)
+        {
+            SetDescription(description);
+            SetAmount(amount);
+            this.Type = type;
+            this.DueDate = dueDate;
+            this.IsCompleted = isCompleted;
+            HandleCompletionDate();
+        }
+
         public string Description { get; private set; } = string.Empty;
         public TransactionType Type { get; private set; }
         public decimal Amount { get; private set; } = decimal.Zero;
@@ -30,10 +40,6 @@ namespace finefin.Domain.Entities
         public virtual Wallet? Wallet { get; private set; }
         public Guid WalletId { get; private set; }
 
-        public void HandleRecurrence(Recurrence recurrence)
-        {
-
-        }
         private void SetDescription(string description)
         {
             if (string.IsNullOrWhiteSpace(description))

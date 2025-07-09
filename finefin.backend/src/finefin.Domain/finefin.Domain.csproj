@@ -10,4 +10,8 @@
     <PackageReference Include="valet" Version="2.0.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\finefin.Shared\finefin.Shared.csproj" />
+  </ItemGroup>
+
 </Project>
