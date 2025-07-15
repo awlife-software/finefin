@@ -78,6 +78,15 @@ namespace finefin.Domain.Entities
             Touch();
         }
 
+        public void HandleBalanceOnCancellation(Transaction transaction)
+        {
+            if (transaction.Type == TransactionType.INCOME && transaction.Amount > Balance)
+                throw new InsufficientFundsException();
+
+            Balance += transaction.Type == TransactionType.INCOME ? -transaction.Amount : transaction.Amount;
+            Touch();
+        }
+
         private void Touch()
         {
             this.UpdatedAt = DateTime.UtcNow;

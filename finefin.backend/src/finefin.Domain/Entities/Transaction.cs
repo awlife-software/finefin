@@ -18,8 +18,6 @@ namespace finefin.Domain.Entities
             this.WalletId = walletId;
         }
 
-      
-
         public string Description { get; private set; } = string.Empty;
         public TransactionType Type { get; private set; }
         public decimal Amount { get; private set; } = decimal.Zero;
@@ -59,6 +57,14 @@ namespace finefin.Domain.Entities
         public void Complete()
         {
             IsCompleted = true;
+            CompletionDate = DateTime.UtcNow;
+            Touch();
+        }
+
+        public void Revert()
+        {
+            IsCompleted = false;
+            CompletionDate = DateTime.MinValue;
             Touch();
         }
 

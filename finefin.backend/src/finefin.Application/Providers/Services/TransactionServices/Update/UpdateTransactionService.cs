@@ -48,22 +48,36 @@ namespace finefin.Application.Providers.Services.TransactionServices.Update
 
         public async Task UpdateTransaction(string userId, UpdateTransactionRequest request)
         {
-            await Validate(request);
+            await Validate(request); // TODO: CHECK IF NEGATIVE AMOUNT IS ALLOWED
 
-            var entity = await _transactionRepository.GetTransactionWithDependencies(request.TransactionId)
+            var transaction = await _transactionRepository.GetTransactionWithDependencies(request.TransactionId)
                 ?? throw new InvalidIdException();
 
-            if (!await _walletRepository.WalletBelongsToUser(entity.WalletId, Guid.Parse(userId)))
+            if (!await _walletRepository.WalletBelongsToUser(transaction.WalletId, Guid.Parse(userId)))
                 throw new WalletDontBelongToUserException();
 
+            var wallet = await _walletRepository.GetAsync(x => x.Id == transaction.WalletId)
+                ?? throw new InvalidIdException();
 
-            entity.HandleFirstOccurrence(request);
-
-            _transactionRepository.Update(entity);
-
-            if (entity.Recurrence!.Occurrences > 1 && request.RecurrenceOption == UpdateRecurrenceOption.All.ToString())
+            if (transaction.IsCompleted && !request.IsCompleted)
             {
-                var list = await _transactionRepository.GetRecurrenceTransactions(entity.RecurrenceId, entity.DueDate.Date);
+                wallet.HandleBalanceOnCancellation(transaction);
+                transaction.Revert();
+                // TODO: UPDATE BALANCE AFTER REVERTING
+            }
+            if (!transaction.IsCompleted && request.IsCompleted)
+            {
+                // TODO: UPDATE BALANCE BEFORE COMPLETING
+                wallet.HandleBalanceOnCompletion(transaction);
+                transaction.Complete();
+            }
+                
+
+            _transactionRepository.Update(transaction);
+
+            if (transaction.Recurrence!.Occurrences > 1 && request.RecurrenceOption == UpdateRecurrenceOption.All.ToString())
+            {
+                var list = await _transactionRepository.GetRecurrenceTransactions(transaction.RecurrenceId, transaction.DueDate.Date);
 
                 var index = 1;
 

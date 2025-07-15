@@ -10,17 +10,7 @@ namespace finefin.Application.Providers.Services.TransactionServices.Update
         public static void HandleCompetionAndBalance(this Transaction entity, UpdateTransactionRequest request)
         {
             // UNCONFIRM TRANSACTION
-            if (entity.IsCompleted && !request.IsCompleted)
-            {
-                entity.IsCompleted = false;
-                entity.CompletionDate = DateTime.MinValue;
-
-                if (entity.Type == TransactionType.INCOME)
-                    entity.Wallet!.Balance -= entity.Amount;// SUBTRAI O VALOR PERSISTIDO // TODO: TESTAR SE A MANIPULAÇÃO DE SALDO DIRETA VAI ROLAR
-                else
-                    entity.Wallet!.Balance += entity.Amount;
-                entity.Amount = request.Amount;
-            }
+            
 
             // CONFIRM TRANSACTION
             if (!entity.IsCompleted && request.IsCompleted)
