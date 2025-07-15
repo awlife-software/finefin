@@ -1,4 +1,5 @@
 ﻿using finefin.Domain.Entities.Enums;
+using finefin.Shared.Exceptions;
 using System.ComponentModel.DataAnnotations;
 using valet.lib.Core.Domain.Entities;
 
@@ -6,7 +7,7 @@ namespace finefin.Domain.Entities
 {
     public class Wallet : BaseEntity
     {
-        private Wallet() { }
+        protected Wallet() { }
         public Wallet(WalletType type, string name, WalletColor collor, decimal balance, Guid userId)
         {
             this.Type = type;
@@ -51,7 +52,7 @@ namespace finefin.Domain.Entities
             this.Balance = balance;
         }
 
-        public void RegisterIncome(decimal amount)
+        internal void Deposit(decimal amount)
         {
             if (amount <= 0)
                 throw new ArgumentException("Income amount must be greater than zero.", nameof(amount));
@@ -59,11 +60,21 @@ namespace finefin.Domain.Entities
             Touch();
         }
 
-        public void RegisterExpense(decimal amount)
+        internal void Withdraw(decimal amount)
         {
             if (amount <= 0)
                 throw new ArgumentException("Expense amount must be greater than zero.", nameof(amount));
             this.Balance -= amount;
+            Touch();
+        }
+
+        public void HandleBalanceOnCompletion(Transaction transaction)
+        {
+            if (transaction.Type == TransactionType.EXPENSE && transaction.Amount > Balance)
+                throw new InsufficientFundsException();
+
+            Balance += transaction.Type == TransactionType.INCOME ? transaction.Amount : -transaction.Amount;
+
             Touch();
         }
 

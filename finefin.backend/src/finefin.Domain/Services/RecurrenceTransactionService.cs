@@ -45,9 +45,9 @@ namespace finefin.Domain.Services
         private static void HandleBalance(Wallet wallet, Transaction transaction)
         {
             if (transaction.Type == TransactionType.INCOME)
-                wallet.RegisterIncome(transaction.Amount);
+                wallet.Deposit(transaction.Amount);
             else
-                wallet.RegisterExpense(transaction.Amount);
+                wallet.Withdraw(transaction.Amount);
         }
     }
 }

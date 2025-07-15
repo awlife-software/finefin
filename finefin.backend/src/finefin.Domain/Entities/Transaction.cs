@@ -36,6 +36,7 @@ namespace finefin.Domain.Entities
             if (string.IsNullOrWhiteSpace(description))
                 throw new ArgumentException("Transaction description cannot be empty.", nameof(description));
             this.Description = description;
+            Touch();
         }
 
         private void SetAmount(decimal amount)
@@ -43,6 +44,7 @@ namespace finefin.Domain.Entities
             if (amount < 0)
                 throw new ArgumentException("Transaction amount cannot be negative.", nameof(amount));
             this.Amount = amount;
+            Touch();
         }
 
         private void HandleCompletionDate()
@@ -51,6 +53,18 @@ namespace finefin.Domain.Entities
                 this.CompletionDate = DateTime.UtcNow;
             else
                 this.CompletionDate = DateTime.MinValue;
+            Touch();
+        }
+
+        public void Complete()
+        {
+            IsCompleted = true;
+            Touch();
+        }
+
+        private void Touch()
+        {
+            this.UpdatedAt = DateTime.UtcNow;
         }
     }
 }
