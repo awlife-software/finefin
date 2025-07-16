@@ -1,5 +1,4 @@
 ﻿using finefin.Application.Providers.Validation.Transaction.Interfaces;
-using finefin.Domain.Entities.Enums;
 using finefin.Domain.Entities;
 using finefin.Domain.Interfaces.Repositories;
 using finefin.Shared.Communication.Requests;
@@ -59,50 +58,11 @@ namespace finefin.Application.Providers.Services.TransactionServices.Update
             var wallet = await _walletRepository.GetAsync(x => x.Id == transaction.WalletId)
                 ?? throw new InvalidIdException();
 
-            if (transaction.IsCompleted && !request.IsCompleted)
-            {
-                wallet.HandleBalanceOnCancellation(transaction);
-                transaction.Revert();
-                // TODO: UPDATE BALANCE AFTER REVERTING
-            }
-            if (!transaction.IsCompleted && request.IsCompleted)
-            {
-                // TODO: UPDATE BALANCE BEFORE COMPLETING
-                wallet.HandleBalanceOnCompletion(transaction);
-                transaction.Complete();
-            }
-                
+            HandleBalance(transaction, wallet, request);
 
             _transactionRepository.Update(transaction);
 
-            if (transaction.Recurrence!.Occurrences > 1 && request.RecurrenceOption == UpdateRecurrenceOption.All.ToString())
-            {
-                var list = await _transactionRepository.GetRecurrenceTransactions(transaction.RecurrenceId, transaction.DueDate.Date);
-
-                var index = 1;
-
-                list.ForEach(x =>
-                {
-                    x.HandleRecurrences(request, index);
-                    index++;
-                });
-
-                _transactionRepository.UpdateRange(list);
-            }
-
             await _unitOfWork.Commit();
-        }
-
-        // TODO: OTIMIZAR E REAPROVEITAR MÉTODOS
-        private async Task ValidateExpense(decimal amount, bool isCompleted, Guid walletId)
-        {
-            if (isCompleted)
-            {
-                var balance = await _walletRepository.GetWalletBalance(walletId);
-
-                if (amount > balance)
-                    throw new InsufficientFundsException();
-            }
         }
 
         private async Task Validate(UpdateTransactionRequest request)
@@ -116,6 +76,25 @@ namespace finefin.Application.Providers.Services.TransactionServices.Update
             }
         }
 
-
+        private void HandleBalance(Transaction transaction, Wallet wallet, UpdateTransactionRequest request)
+        {
+            if (transaction.IsCompleted && !request.IsCompleted)
+            {
+                wallet.HandleBalanceOnCancellation(transaction);
+                transaction.Revert();
+                return;
+            }
+            if (!transaction.IsCompleted && request.IsCompleted)
+            {
+                wallet.HandleBalanceOnCompletion(transaction);
+                transaction.Complete();
+                return;
+            }
+            if (!transaction.Amount.Equals(request.Amount) && transaction.IsCompleted)
+            {
+                wallet.OverwriteTransactionAmount(transaction, request.Amount);
+                return;
+            }
+        }
     }
 }

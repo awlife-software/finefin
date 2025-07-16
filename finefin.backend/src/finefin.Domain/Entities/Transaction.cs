@@ -68,6 +68,11 @@ namespace finefin.Domain.Entities
             Touch();
         }
 
+        public void UpdateAmount(decimal amount)
+        {
+            SetAmount(amount);
+        }
+
         private void Touch()
         {
             this.UpdatedAt = DateTime.UtcNow;

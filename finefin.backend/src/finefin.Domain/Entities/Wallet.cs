@@ -87,6 +87,21 @@ namespace finefin.Domain.Entities
             Touch();
         }
 
+        public void OverwriteTransactionAmount(Transaction transaction, decimal newAmount)
+        {
+            if (newAmount < 0)
+                throw new ArgumentException("Transaction amount cannot be negative.", nameof(newAmount));
+
+            if (transaction.Type == TransactionType.EXPENSE && newAmount > Balance)
+                throw new InsufficientFundsException();
+
+            var difference = newAmount - transaction.Amount;
+            Balance += difference;
+
+            transaction.UpdateAmount(newAmount);
+            Touch();
+        }
+
         private void Touch()
         {
             this.UpdatedAt = DateTime.UtcNow;
