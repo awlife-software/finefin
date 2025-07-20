@@ -76,7 +76,7 @@ namespace finefin.Application.UseCases.Transaction.Update
             }
         }
 
-        private void HandleBalance(Domain.Entities.Transaction transaction, Wallet wallet, UpdateTransactionRequest request)
+        private void HandleBalance(Domain.Entities.Transaction transaction, Domain.Entities.Wallet wallet, UpdateTransactionRequest request)
         {
             if (transaction.IsCompleted && !request.IsCompleted)
             {

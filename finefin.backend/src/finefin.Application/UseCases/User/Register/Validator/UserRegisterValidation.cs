@@ -2,7 +2,7 @@
 using FluentValidation;
 using valet.lib.Auth.Domain.Interfaces.Repositories;
 
-namespace finefin.Application.UseCases.UserServices.Register.Validator
+namespace finefin.Application.UseCases.User.Register.Validator
 {
     public class UserRegisterValidation : AbstractValidator<RegisterUserRequest>, IUserRegisterValidation
     {

@@ -1,20 +1,20 @@
-﻿using finefin.Application.UseCases.UserServices.Login.Validator;
+﻿using finefin.Application.UseCases.User.Login.Validator;
 using finefin.Shared.Communication.Requests;
 using finefin.Shared.Communication.Responses;
 using finefin.Shared.Exceptions;
 using valet.lib.Auth.Domain.Interfaces;
 using valet.lib.Auth.Domain.Interfaces.Repositories;
 
-namespace finefin.Application.UseCases.UserServices.Login
+namespace finefin.Application.UseCases.User.Login
 {
-    public class LoginService : ILoginService
+    public class UserLogin : IUserLogin
     {
-        private readonly ILoginValidation _loginValidation;
+        private readonly IUserLoginValidation _loginValidation;
         private readonly IUserRepository _userRepository;
         private readonly IPasswordHasher _passwordHasher;
         private readonly ITokenGenerator _tokenGenerator;
         
-        public LoginService(ILoginValidation loginValidation, IUserRepository userRepository, IPasswordHasher passwordHasher, ITokenGenerator tokenGenerator)
+        public UserLogin(IUserLoginValidation loginValidation, IUserRepository userRepository, IPasswordHasher passwordHasher, ITokenGenerator tokenGenerator)
         {
             _loginValidation = loginValidation;
             _userRepository = userRepository;

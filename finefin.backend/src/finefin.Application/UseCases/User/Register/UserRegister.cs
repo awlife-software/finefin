@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using finefin.Application.UseCases.UserServices.Register.Validator;
+using finefin.Application.UseCases.User.Register.Validator;
 using finefin.Domain.Entities;
 using finefin.Shared.Communication.Requests;
 using finefin.Shared.Exceptions;
@@ -8,9 +8,9 @@ using valet.lib.Auth.Domain.Interfaces;
 using valet.lib.Auth.Domain.Interfaces.Repositories;
 using valet.lib.Core.Domain.Interfaces;
 
-namespace finefin.Application.UseCases.UserServices.Register
+namespace finefin.Application.UseCases.User.Register
 {
-    public class UserRegisterService : IUserRegisterService
+    public class UserRegister : IUserRegister
     {
         private readonly IUserRegisterValidation _userRegisterValidation;
         private readonly IMapper _mapper;
@@ -20,7 +20,7 @@ namespace finefin.Application.UseCases.UserServices.Register
         private readonly IRoleRepository _roleRepository;
         // TODO: ADICIONAR A CLAUTH A RESPONSÁBILIDADE PELO REPOSITÓRIO GENÉRICO, PELO UNITOFWORK E TODAS AS RESPONABILIDADES DE USERREPOSITORY
 
-        public UserRegisterService(IUserRegisterValidation userRegisterValidation, IMapper mapper, IPasswordHasher passwordHasher, IUnitOfWork unitOfWork, IUserRepository userRepository, IRoleRepository roleRepository)
+        public UserRegister(IUserRegisterValidation userRegisterValidation, IMapper mapper, IPasswordHasher passwordHasher, IUnitOfWork unitOfWork, IUserRepository userRepository, IRoleRepository roleRepository)
         {
             _userRegisterValidation = userRegisterValidation;
             _mapper = mapper;

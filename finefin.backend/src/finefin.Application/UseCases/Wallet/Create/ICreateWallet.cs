@@ -1,8 +1,8 @@
 ﻿using finefin.Shared.Communication.Requests;
 
-namespace finefin.Application.UseCases.WalletServices.Create
+namespace finefin.Application.UseCases.Wallet.Create
 {
-    public interface ICreateWalletService
+    public interface ICreateWallet
     {
         Task CreateWallet(string userId, CreateWalletRequest request);
     }

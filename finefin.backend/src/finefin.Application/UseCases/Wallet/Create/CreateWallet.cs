@@ -1,15 +1,15 @@
 ﻿
 using AutoMapper;
-using finefin.Application.UseCases.WalletServices.Create.Validator;
+using finefin.Application.UseCases.Wallet.Create.Validator;
 using finefin.Domain.Entities;
 using finefin.Domain.Interfaces.Repositories;
 using finefin.Shared.Communication.Requests;
 using finefin.Shared.Exceptions;
 using valet.lib.Core.Domain.Interfaces;
 
-namespace finefin.Application.UseCases.WalletServices.Create
+namespace finefin.Application.UseCases.Wallet.Create
 {
-    public class CreateWalletService : ICreateWalletService
+    public class CreateWallet : ICreateWallet
     {
         private readonly ICreateWalletValidation _walletValidation;
         private readonly IWalletRepository _walletRepository;
@@ -17,7 +17,7 @@ namespace finefin.Application.UseCases.WalletServices.Create
         private readonly IMapper _mapper;
 
 
-        public CreateWalletService(ICreateWalletValidation walletValidation, IWalletRepository walletRepository, IUnitOfWork unitOfWork, IMapper mapper)
+        public CreateWallet(ICreateWalletValidation walletValidation, IWalletRepository walletRepository, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _walletValidation = walletValidation;
             _walletRepository = walletRepository;
@@ -29,7 +29,7 @@ namespace finefin.Application.UseCases.WalletServices.Create
         {
             await ValidateAsync(request);
 
-            var wallet = _mapper.Map<Wallet>(request);
+            var wallet = _mapper.Map<Domain.Entities.Wallet>(request);
 
             //wallet = Guid.Parse(userId);
 

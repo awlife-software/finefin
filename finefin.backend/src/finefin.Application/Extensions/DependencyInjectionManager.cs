@@ -6,12 +6,12 @@ using finefin.Application.UseCases.Transaction.Create;
 using finefin.Application.UseCases.Transaction.Create.Validator;
 using finefin.Application.UseCases.Transaction.Search;
 using finefin.Application.UseCases.Transaction.Update.Validator;
-using finefin.Application.UseCases.UserServices.Login;
-using finefin.Application.UseCases.UserServices.Login.Validator;
-using finefin.Application.UseCases.UserServices.Register;
-using finefin.Application.UseCases.UserServices.Register.Validator;
-using finefin.Application.UseCases.WalletServices.Create;
-using finefin.Application.UseCases.WalletServices.Create.Validator;
+using finefin.Application.UseCases.User.Login;
+using finefin.Application.UseCases.User.Login.Validator;
+using finefin.Application.UseCases.User.Register;
+using finefin.Application.UseCases.User.Register.Validator;
+using finefin.Application.UseCases.Wallet.Create;
+using finefin.Application.UseCases.Wallet.Create.Validator;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -28,9 +28,9 @@ namespace finefin.Application.Extensions
 
         private static void AddServices(this IServiceCollection services)
         {
-            services.AddScoped<IUserRegisterService, UserRegisterService>();
-            services.AddScoped<ILoginService, LoginService>();
-            services.AddScoped<ICreateWalletService, CreateWalletService>();
+            services.AddScoped<IUserRegister, UserRegister>();
+            services.AddScoped<IUserLogin, UserLogin>();
+            services.AddScoped<ICreateWallet, CreateWallet>();
             services.AddScoped<ICreateTransaction, CreateTransaction>();
             services.AddScoped<ISearchTransaction, SearchTransaction>();
             //services.AddScoped<IUpdateTransactionService, UpdateTransactionService>();
@@ -40,7 +40,7 @@ namespace finefin.Application.Extensions
         private static void AddExtraProviders(this IServiceCollection services)
         {
             services.AddTransient<IUserRegisterValidation, UserRegisterValidation>();
-            services.AddTransient<ILoginValidation, LoginValidation>();
+            services.AddTransient<IUserLoginValidation, UserLoginValidation>();
             services.AddTransient<ICreateWalletValidation, CreateWalletValidation>();
             services.AddTransient<ICreateTransactionValidation, CreateTransactionValidation>();
             services.AddTransient<IUpdateTransactionValidation, UpdateTransactionValidation>();

@@ -1,8 +1,8 @@
 ﻿using finefin.Shared.Communication.Requests;
 
-namespace finefin.Application.UseCases.UserServices.Register
+namespace finefin.Application.UseCases.User.Register
 {
-    public interface IUserRegisterService
+    public interface IUserRegister
     {
         Task RegisterUser(RegisterUserRequest request);
     }

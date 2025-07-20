@@ -1,5 +1,5 @@
-﻿using finefin.Application.UseCases.UserServices.Login;
-using finefin.Application.UseCases.UserServices.Register;
+﻿using finefin.Application.UseCases.User.Login;
+using finefin.Application.UseCases.User.Register;
 using finefin.Shared.Communication.Requests;
 using finefin.Shared.Communication.Responses;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +15,7 @@ namespace finefin.WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> RegisterUser([FromServices] IUserRegisterService service, [FromBody] RegisterUserRequest request)
+        public async Task<IActionResult> RegisterUser([FromServices] IUserRegister service, [FromBody] RegisterUserRequest request)
         {
             await service.RegisterUser(request);
 
@@ -26,7 +26,7 @@ namespace finefin.WebAPI.Controllers
         [ProducesResponseType(typeof(UserLoginResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Login([FromServices] ILoginService service, [FromBody] UserLoginRequest request)
+        public async Task<IActionResult> Login([FromServices] IUserLogin service, [FromBody] UserLoginRequest request)
         {
             var result = await service.Login(request);
 

@@ -2,13 +2,13 @@
 using FluentValidation;
 using valet.lib.Auth.Domain.Interfaces.Repositories;
 
-namespace finefin.Application.UseCases.UserServices.Login.Validator
+namespace finefin.Application.UseCases.User.Login.Validator
 {
-    public class LoginValidation : AbstractValidator<UserLoginRequest>, ILoginValidation
+    public class UserLoginValidation : AbstractValidator<UserLoginRequest>, IUserLoginValidation
     {
         private readonly IUserRepository _userRepository;
 
-        public LoginValidation(IUserRepository userRepository)
+        public UserLoginValidation(IUserRepository userRepository)
         {
             _userRepository = userRepository;
 
