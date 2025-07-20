@@ -16,8 +16,4 @@
     <ProjectReference Include="..\finefin.Shared\finefin.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="UseCases\Transaction\Get\Validator\" />
-  </ItemGroup>
-
 </Project>

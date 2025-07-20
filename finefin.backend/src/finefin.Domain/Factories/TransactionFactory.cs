@@ -1,6 +1,6 @@
 ﻿using finefin.Domain.Entities;
 using finefin.Domain.Entities.Enums;
-using finefin.Shared.Communication.Requests;
+using finefin.Shared.Communication.Requests.Transaction;
 
 namespace finefin.Domain.Factories
 {

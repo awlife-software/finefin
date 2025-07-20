@@ -1,4 +1,4 @@
-﻿using finefin.Application.UseCases.Dashboard.Interfaces;
+﻿using finefin.Application.Services.DashboardServices.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using valet.lib.Auth.Service.Token.Middlewares;
@@ -17,7 +17,7 @@ namespace finefin.WebAPI.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status401Unauthorized)]
-        public async Task<IActionResult> GetCurrentMonthSummary([FromServices] ISummary service)
+        public async Task<IActionResult> GetCurrentMonthSummary([FromServices] ISummaryService service)
         {
             var userId = HttpContext.User.FindFirst(ClaimTypes.Sid)?.Value;
 
@@ -31,7 +31,7 @@ namespace finefin.WebAPI.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status401Unauthorized)]
-        public async Task<IActionResult> GetSpecificMonthSummary([FromServices] ISummary service, [FromQuery] DateTime date)
+        public async Task<IActionResult> GetSpecificMonthSummary([FromServices] ISummaryService service, [FromQuery] DateTime date)
         {
             var userId = HttpContext.User.FindFirst(ClaimTypes.Sid)?.Value;
 

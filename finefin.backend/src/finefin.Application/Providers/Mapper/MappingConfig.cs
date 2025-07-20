@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using finefin.Domain.Entities;
-using finefin.Shared.Communication.Requests;
-using finefin.Shared.Communication.Responses;
+using finefin.Shared.Communication.Requests.Transaction;
+using finefin.Shared.Communication.Requests.User;
+using finefin.Shared.Communication.Requests.Wallet;
+using finefin.Shared.Communication.Responses.Transaction;
 
 namespace finefin.Application.Providers.Mapper
 {
@@ -27,7 +29,7 @@ namespace finefin.Application.Providers.Mapper
         {
             CreateMap<Transaction, PendingTransactionResponse>()
                 .ForMember(dest => dest.RecurrenceType,
-                            opt => opt.MapFrom(src => src.Recurrence.Type))
+                            opt => opt.MapFrom(src => src.Recurrence!.Type))
                 .ForMember(dest => dest.Occurrences,
                             opt => opt.MapFrom(src => src.Recurrence != null ? src.Recurrence.Occurrences : 1)).ReverseMap();
         }

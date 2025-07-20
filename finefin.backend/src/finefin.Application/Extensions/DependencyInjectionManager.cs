@@ -1,17 +1,17 @@
 ﻿using finefin.Application.Providers.Mapper;
-using finefin.Application.Providers.Services.TransactionServices.Update;
-using finefin.Application.UseCases.Dashboard;
-using finefin.Application.UseCases.Dashboard.Interfaces;
-using finefin.Application.UseCases.Transaction.Create;
-using finefin.Application.UseCases.Transaction.Create.Validator;
-using finefin.Application.UseCases.Transaction.Search;
-using finefin.Application.UseCases.Transaction.Update.Validator;
-using finefin.Application.UseCases.User.Login;
-using finefin.Application.UseCases.User.Login.Validator;
-using finefin.Application.UseCases.User.Register;
-using finefin.Application.UseCases.User.Register.Validator;
-using finefin.Application.UseCases.Wallet.Create;
-using finefin.Application.UseCases.Wallet.Create.Validator;
+using finefin.Application.Services.DashboardServices;
+using finefin.Application.Services.DashboardServices.Interfaces;
+using finefin.Application.Services.TransactionServices.Create;
+using finefin.Application.Services.TransactionServices.Create.Validator;
+using finefin.Application.Services.TransactionServices.Get;
+using finefin.Application.Services.TransactionServices.Update;
+using finefin.Application.Services.TransactionServices.Update.Validator;
+using finefin.Application.Services.UserServices.Login;
+using finefin.Application.Services.UserServices.Login.Validator;
+using finefin.Application.Services.UserServices.Register;
+using finefin.Application.Services.UserServices.Register.Validator;
+using finefin.Application.Services.WalletServices.Create;
+using finefin.Application.Services.WalletServices.Create.Validator;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -28,13 +28,13 @@ namespace finefin.Application.Extensions
 
         private static void AddServices(this IServiceCollection services)
         {
-            services.AddScoped<IUserRegister, UserRegister>();
-            services.AddScoped<IUserLogin, UserLogin>();
-            services.AddScoped<ICreateWallet, CreateWallet>();
-            services.AddScoped<ICreateTransaction, CreateTransaction>();
-            services.AddScoped<ISearchTransaction, SearchTransaction>();
-            //services.AddScoped<IUpdateTransactionService, UpdateTransactionService>();
-            services.AddScoped<ISummary, Summary>();
+            services.AddScoped<IUserRegisterService, UserRegisterService>();
+            services.AddScoped<IUserLoginService, UserLoginService>();
+            services.AddScoped<ICreateWalletService, CreateWalletService>();
+            services.AddScoped<ICreateTransactionService, CreateTransactionService>();
+            services.AddScoped<IGetTransactionService, GetTransactionService>();
+            services.AddScoped<IUpdateTransactionService, UpdateTransactionService>();
+            services.AddScoped<ISummaryService, SummaryService>();
         }
 
         private static void AddExtraProviders(this IServiceCollection services)

@@ -1,5 +1,5 @@
-﻿using finefin.Application.UseCases.Wallet.Create;
-using finefin.Shared.Communication.Requests;
+﻿using finefin.Application.Services.WalletServices.Create;
+using finefin.Shared.Communication.Requests.Wallet;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using valet.lib.Auth.Service.Token.Middlewares;
@@ -18,11 +18,11 @@ namespace finefin.WebAPI.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status401Unauthorized)]
-        public async Task<IActionResult> CreateWallet([FromServices] ICreateWallet service, [FromBody] CreateWalletRequest request)
+        public async Task<IActionResult> CreateWallet([FromServices] ICreateWalletService service, [FromBody] CreateWalletRequest request)
         {
             var userId = HttpContext.User.FindFirst(ClaimTypes.Sid)?.Value;
 
-            await service.CreateWallet(userId!, request);
+            await service.Create(userId!, request);
 
             return Created(string.Empty, null);
         }
