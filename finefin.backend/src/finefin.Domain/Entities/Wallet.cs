@@ -1,6 +1,5 @@
 ﻿using finefin.Domain.Entities.Enums;
 using finefin.Shared.Exceptions;
-using System.ComponentModel.DataAnnotations;
 using valet.lib.Core.Domain.Entities;
 
 namespace finefin.Domain.Entities
@@ -64,6 +63,10 @@ namespace finefin.Domain.Entities
         {
             if (amount <= 0)
                 throw new ArgumentException("Expense amount must be greater than zero.", nameof(amount));
+
+            if (amount > Balance)
+                throw new InsufficientFundsException();
+
             this.Balance -= amount;
             Touch();
         }

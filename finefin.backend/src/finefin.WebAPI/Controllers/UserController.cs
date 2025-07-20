@@ -1,5 +1,5 @@
-﻿using finefin.Application.Providers.Services.UserServices.Login;
-using finefin.Application.Providers.Services.UserServices.Register;
+﻿using finefin.Application.UseCases.UserServices.Login;
+using finefin.Application.UseCases.UserServices.Register;
 using finefin.Shared.Communication.Requests;
 using finefin.Shared.Communication.Responses;
 using Microsoft.AspNetCore.Mvc;

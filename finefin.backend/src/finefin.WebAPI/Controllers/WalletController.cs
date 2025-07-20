@@ -1,4 +1,4 @@
-﻿using finefin.Application.Providers.Services.WalletServices.Create;
+﻿using finefin.Application.UseCases.WalletServices.Create;
 using finefin.Shared.Communication.Requests;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
