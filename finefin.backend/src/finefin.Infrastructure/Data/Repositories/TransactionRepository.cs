@@ -26,6 +26,12 @@ namespace finefin.Infrastructure.Data.Repositories
             .Include(x => x.Recurrence)
             .FirstAsync(x => x.Id == transactionId);
 
+        public async Task<List<Transaction>> GetAllPendingTransactionFromRecurrence(Guid recurrenceId) => await dbSet
+            .Include(x => x.Wallet)
+            .Include(x => x.Recurrence)
+            .Where(x => x.RecurrenceId == recurrenceId && !x.IsCompleted)
+            .ToListAsync();
+
         public async Task<decimal> GetMonthTotalIncomes(Guid userId, DateTime date) => await dbSet
             .Include(x => x.Wallet)
             .Where(x => x.Wallet!.UserId.Equals(userId) && x.DueDate.Month.Equals(date.Month) && x.DueDate.Year.Equals(date.Year) && x.Type == TransactionType.INCOME && x.IsCompleted)

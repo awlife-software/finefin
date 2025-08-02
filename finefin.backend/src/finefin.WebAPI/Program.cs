@@ -16,10 +16,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication(builder.Configuration);
 
-builder.Services.AddValet<AppDbContext>(builder.Configuration, true)
-    .UsePasswordHasher()
-    .UseTokenJwt(builder.Configuration)
-    .UseValetSwaggerGen();
+builder.Services.AddValet<AppDbContext>(builder.Configuration, options =>
+{
+    options.EnableValetHash = true;
+    options.EnableValetAuth = true;
+    options.EnableValetSwaggerGen = true;
+});
 
 builder.Services.AddMvc(options => options.Filters.Add(typeof(ExceptionFilter)));
 builder.Services.AddRouting(options => options.LowercaseUrls = true);

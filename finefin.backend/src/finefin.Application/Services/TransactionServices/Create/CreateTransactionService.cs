@@ -56,7 +56,7 @@ namespace finefin.Application.Services.TransactionServices.Create
             await _recurrenceRepository.CreateAsync(recurrence);
             _walletRepository.Update(wallet);
 
-            await _unitOfWork.Commit();
+            await _unitOfWork.CommitAsync();
         }
 
         private async Task Validate(CreateTransactionRequest request)

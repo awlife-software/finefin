@@ -34,7 +34,7 @@ namespace finefin.Application.Services.WalletServices.Create
             //wallet = Guid.Parse(userId);
 
             await _walletRepository.CreateAsync(wallet);
-            await _unitOfWork.Commit();
+            await _unitOfWork.CommitAsync();
         }
 
         private async Task ValidateAsync(CreateWalletRequest request)

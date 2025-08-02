@@ -42,12 +42,14 @@ namespace finefin.Application.Services.TransactionServices.Update
             transaction.Complete();
 
             _transactionRepository.Update(transaction);
-            await _unitOfWork.Commit();
+            await _unitOfWork.CommitAsync();
         }
 
         public async Task Update(string userId, UpdateTransactionRequest request)
         {
             await Validate(request); // TODO: CHECK IF NEGATIVE AMOUNT IS ALLOWED
+
+            var transactions = new List<Transaction>();
 
             var transaction = await _transactionRepository.GetTransactionWithDependencies(request.TransactionId)
                 ?? throw new InvalidIdException();
@@ -59,10 +61,19 @@ namespace finefin.Application.Services.TransactionServices.Update
                 ?? throw new InvalidIdException();
 
             HandleBalance(transaction, wallet, request);
+            // TODO: HANDLE CHANGES
+            transactions.Add(transaction);
 
-            _transactionRepository.Update(transaction);
+            if (request.AllPendingTransactions)
+            {
+                var pendingTransactions = await _transactionRepository.GetAllPendingTransactionFromRecurrence(transaction.RecurrenceId);
+                // TODO: HANDLE CHANGES FOR PENDING TRANSACTIONS
+                pendingTransactions.ForEach(x => transactions.Add(x));
+            }
 
-            await _unitOfWork.Commit();
+            _transactionRepository.UpdateRange(transactions);
+
+            await _unitOfWork.CommitAsync();
         }
 
         private async Task Validate(UpdateTransactionRequest request)

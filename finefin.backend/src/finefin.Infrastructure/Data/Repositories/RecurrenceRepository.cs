@@ -1,5 +1,6 @@
 ﻿using finefin.Domain.Entities;
 using finefin.Domain.Interfaces.Repositories;
+using Microsoft.EntityFrameworkCore;
 using valet.lib.Core.Data.Repositories;
 
 namespace finefin.Infrastructure.Data.Repositories
@@ -16,5 +17,9 @@ namespace finefin.Infrastructure.Data.Repositories
 
             return recurrence;
         }
+
+        public async Task<Recurrence> GetRecurrenceWithDependencies(Guid recurrenceId) => await dbSet
+            .Include(x => x.Transactions)
+            .FirstAsync(x => x.Id == recurrenceId);
     }
 }

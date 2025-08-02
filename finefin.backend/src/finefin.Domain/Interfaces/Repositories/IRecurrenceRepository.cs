@@ -6,5 +6,6 @@ namespace finefin.Domain.Interfaces.Repositories
     public interface IRecurrenceRepository : IRepository<Recurrence>
     {
         Task<Recurrence> CreateAndGetAsync(Recurrence recurrence);
+        Task<Recurrence> GetRecurrenceWithDependencies(Guid recurrenceId);
     }
 }

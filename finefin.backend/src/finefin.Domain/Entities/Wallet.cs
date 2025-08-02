@@ -104,10 +104,5 @@ namespace finefin.Domain.Entities
             transaction.UpdateAmount(newAmount);
             Touch();
         }
-
-        private void Touch()
-        {
-            this.UpdatedAt = DateTime.UtcNow;
-        }
     }
 }

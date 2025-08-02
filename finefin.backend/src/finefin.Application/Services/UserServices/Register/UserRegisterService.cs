@@ -34,28 +34,26 @@ namespace finefin.Application.Services.UserServices.Register
         {
             await ValidateAsync(request);
 
-            var user = _mapper.Map<LocalUser>(request);
-           
-            user.SetHashedPassword(_passwordHasher.HashPassword(request.Password));
+            var user = new LocalUser(request.FirstName,request.LastName, request.Email, _passwordHasher.HashPassword(request.Password));
 
             var role = await RoleHandler();
 
-            user.UserRoles.Add(new UserRole { Role = role });
+            user.UserRoles.Add(new UserRole(user, role));
 
             await _userRepository.CreateAsync(user);
 
-            await _unitOfWork.Commit();
+            await _unitOfWork.CommitAsync();
         }
 
         private async Task<Role> RoleHandler()
         {
             if (!_roleRepository.RoleExistsAsync("user").GetAwaiter().GetResult())
             {
-                await _roleRepository.CreateAsync(new Role { Name = "user" });
-                await _unitOfWork.Commit();
+                await _roleRepository.CreateAsync(new Role("user"));
+                await _unitOfWork.CommitAsync();
             }
 
-            return await _roleRepository.GetAsync(x => x.Name.Equals("user"), false);
+            return await _roleRepository.GetAsync(x => x.Name.Equals("user"));
         }
 
         private async Task ValidateAsync(RegisterUserRequest request)

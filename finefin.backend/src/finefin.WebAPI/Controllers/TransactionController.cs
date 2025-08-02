@@ -24,7 +24,7 @@ namespace finefin.WebAPI.Controllers
         {
             var userId = HttpContext.User.FindFirst(ClaimTypes.Sid)?.Value;
 
-            await service.CreateTransaction(userId!, request);
+            await service.Create(userId!, request);
 
             return Created(string.Empty, null);
         }
